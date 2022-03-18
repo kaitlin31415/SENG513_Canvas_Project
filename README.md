@@ -1,2 +1,2 @@
-# SENG513_Canvas_Project
+# CanvUs
 SENG 513 Project
