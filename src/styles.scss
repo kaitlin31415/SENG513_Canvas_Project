@@ -1,0 +1,36 @@
+$primary: #7289DA;
+@import "./../node_modules/bootstrap/scss/bootstrap";
+
+.btn-primary {
+    color: white;
+    width: 100%
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #2C2F33;
+}
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+h1 {
+    text-align: center;
+    margin: 0
+}
+
+/* Login Page */
+.login {
+    padding: 50px 40px;
+    background: #23272A;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
