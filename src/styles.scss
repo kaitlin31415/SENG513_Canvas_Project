@@ -1,10 +1,10 @@
 $primary: #7289DA;
 @import "./../node_modules/bootstrap/scss/bootstrap";
 
-.btn-primary {
-    color: white;
-    width: 100%
-}
+// .btn-primary {
+//     color: white;
+//     width: 100%
+// }
 
 body {
     margin: 0;
@@ -25,7 +25,14 @@ body {
 
 h1 {
     text-align: center;
-    margin: 0
+    margin: 0;
+    font-weight: bold;
+}
+
+h2 {
+    text-align: center;
+    margin: 0;
+    font-weight: bold;
 }
 
 /* Login Page */
@@ -35,9 +42,30 @@ h1 {
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.login .btn-primary {
+    color: white;
+    width: 100%
+}
+
 /* Sign Up Page */
 .signup {
     padding: 50px 40px;
     background: #23272A;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.signup .btn-primary {
+    color: white;
+    width: 100%
+}
+
+/* Bounceback Page */
+.bounceback {
+    padding: 50px 40px;
+    background: #23272A;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bounceback .btn-primary {
+    color: white;
 }
