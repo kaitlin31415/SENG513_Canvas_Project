@@ -1,11 +1,12 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import SignUp from "../components/SignUp";
 
 const SignUpPage = () => {
     return (
-        <Container>
-            Sign Up Page
-        </Container>
+        <div className="content">
+            <h1>CanvUs</h1>
+            <SignUp />
+        </div>
     )
 }
 
