@@ -1,11 +1,6 @@
 $primary: #7289DA;
 @import "./../node_modules/bootstrap/scss/bootstrap";
 
-// .btn-primary {
-//     color: white;
-//     width: 100%
-// }
-
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -68,4 +63,11 @@ h2 {
 
 .bounceback .btn-primary {
     color: white;
+}
+
+/* All Canvases Page */
+.canvasbox {
+    align-content: center;
+    text-align: center;
+    color: black;
 }

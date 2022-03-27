@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import AllCanvasesPage from "./pages/AllCanvasesPage";
 import BounceBackPage from "./pages/BounceBackPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -10,6 +11,7 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/bounceback" element={<BounceBackPage />} />
+        <Route path="/allcanvases" element={<AllCanvasesPage />} />
         <Route
           path="*"
           element={
