@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 
 
 //User Registration
-async function createNewUser(username, password, url) {
+export async function createNewUser(username, password, url) {
 	// Hash the Password
 	password = bcrypt.hashSync(password, 10);
 
@@ -37,7 +37,7 @@ async function createNewUser(username, password, url) {
 }
 
 //User authentication  
-async function authenticate({ username, password }, url, success_callback, no_user_callback) {
+export async function authenticate({ username, password }, url, success_callback, no_user_callback) {
 
 	MongoClient.connect(url, function (err, db) {
 		if (err) throw err;
@@ -57,15 +57,15 @@ async function authenticate({ username, password }, url, success_callback, no_us
 
 
 //createNewUser("secondName", "secondPassword", URI);
-authenticate(	{ "username": "firstName", "password": "firstPassword" }, 
-				URI, 
-				(result) => { 
-					if (result) { 
-						console.log("Authenticated Successfully"); 
-					} else { 
-						console.log("Authentication Failure - incorrect password") 
-					} 
-				}, 
-				() => { console.log("No user exists") }	
-			);
+// authenticate(	{ "username": "firstName", "password": "firstPassword" }, 
+// 				URI, 
+// 				(result) => { 
+// 					if (result) { 
+// 						console.log("Authenticated Successfully"); 
+// 					} else { 
+// 						console.log("Authentication Failure - incorrect password") 
+// 					} 
+// 				}, 
+// 				() => { console.log("No user exists") }	
+// 			);
 // console.log("This Statement: " + goodUser)
