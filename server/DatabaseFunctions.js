@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 
 
 //User Registration
-async function createNewUser(username, password, url) {
+export async function createNewUser(username, password, url) {
 	// Hash the Password
 	password = bcrypt.hashSync(password, 10);
 
@@ -37,7 +37,7 @@ async function createNewUser(username, password, url) {
 }
 
 //User authentication  
-async function authenticate({ username, password }, url, success_callback, no_user_callback) {
+export async function authenticate({ username, password }, url, success_callback, no_user_callback) {
 
 	MongoClient.connect(url, function (err, db) {
 		if (err) throw err;
@@ -56,58 +56,16 @@ async function authenticate({ username, password }, url, success_callback, no_us
 }
 
 
-const express = require('express');
-const app = express();
-
-const http = require('http');
-const server = http.createServer(app);
-
-const { Server } = require("socket.io");
-const io = new Server(server);
-
-app.use(express.static('../dummyClient'))
-
-server.listen(2222, () => {
-	console.log('listening on *:2222');
-});
-
-let current_users = {}
-
-io.on('connection', (socket) => {
-	console.log('user ' + socket.id + ' connected');
-
-	socket.on('log in', (user_info) => {
-		/**
-		 * Assume user_info is a dictionary containing the username and password (unhashed)
-		 * 
-		 */
-		let foundUser = (result) =>{
-			if(result){
-				socket.emit("Successful Authentication", user_info.username);
-				//Add the username and socket id to current user list
-				current_users[user_info.username] = {
-					"socket_id": socket.id,
-					"colour": "#FF00FF"
-				}
-			}else{
-				socket.emit("Failed Authentication", user_info.username);
-			}
-		}
-		let noUser = () => {
-			socket.emit("No User", user_info.username);
-		}
-		authenticate(user_info, URI, foundUser, noUser)
-
-	});
-
-
-	socket.on('chat message', (msg) => {
-	});
-
-	socket.on('disconnect', () => {
-
-	});
-
-	socket.on('checkAndAddUsername', (items) => {
-	});
-});
+//createNewUser("secondName", "secondPassword", URI);
+// authenticate(	{ "username": "firstName", "password": "firstPassword" }, 
+// 				URI, 
+// 				(result) => { 
+// 					if (result) { 
+// 						console.log("Authenticated Successfully"); 
+// 					} else { 
+// 						console.log("Authentication Failure - incorrect password") 
+// 					} 
+// 				}, 
+// 				() => { console.log("No user exists") }	
+// 			);
+// console.log("This Statement: " + goodUser)
