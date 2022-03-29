@@ -3,6 +3,7 @@ import AllCanvasesPage from "./pages/AllCanvasesPage";
 import BounceBackPage from "./pages/BounceBackPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
+import ActiveCanvasPage from "./pages/ActiveCanvasPage";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/bounceback" element={<BounceBackPage />} />
         <Route path="/allcanvases" element={<AllCanvasesPage />} />
+        <Route path="/ActiveCanvusPage" element={<ActiveCanvasPage />} />
         <Route
           path="*"
           element={
