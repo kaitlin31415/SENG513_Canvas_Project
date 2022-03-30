@@ -72,10 +72,17 @@ h2 {
     color: black;
 }
 
-/* Active Canvus Page */
-.toolBar {
+/* Active Canvas Page */
+.activecanvas {
+    align-content: center;
+    text-align: center;
+}
+
+.activecanvas .toolbar {
     width: 10%;
     height: 100vh;
+}
+
+.activecanvas .importcanvasmodal {
     background: #2C2F33;
-    //background: #7289DA;
 }
