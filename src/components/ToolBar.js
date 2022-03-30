@@ -8,11 +8,11 @@ import {
 import "../styles.scss";
 
 
-const ToolBar = () => {
+const ToolBar = (props) => {
     return (
         <div className="ToolButton">
             <div className="text-center">
-                <BrushSize />
+                <BrushSize setShowBrushSizeModal={props.setShowBrushSizeModal} />
                 <p>Brush Size</p>
 
                 <Eraser />

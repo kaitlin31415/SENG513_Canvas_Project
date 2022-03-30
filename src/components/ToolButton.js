@@ -8,14 +8,12 @@ import pen from "../images/pen.svg";
 import stickyNote from "../images/stickyNote.svg";
 
 
-class BrushSize extends React.Component {
-    render() {
-        return (
-            <Button variant="primary" type="submit">
-                <img src={size} style={{width:'50px'}} alt="Brush Size"/>
-            </Button>
-        )
-    }
+const BrushSize = (props) => {
+    return (
+        <Button variant="primary" onClick={() => props.setShowBrushSizeModal(true)}>
+            <img src={size} style={{width:'50px'}} alt="Brush Size"/>
+        </Button>
+    )
 }
 
 class Eraser extends React.Component {
