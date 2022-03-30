@@ -1,4 +1,5 @@
 $primary: #7289DA;
+$modal-content-bg: #404449;
 @import "./../node_modules/bootstrap/scss/bootstrap";
 
 body {
@@ -72,10 +73,25 @@ h2 {
     color: black;
 }
 
-/* Active Canvus Page */
-.toolBar {
+/* Active Canvas Page */
+.activecanvas .toolbar {
     width: 10%;
     height: 100vh;
-    background: #2C2F33;
-    //background: #7289DA;
+}
+
+.jsonfile {
+    padding: 1vw 1vh;
+    width: 50%;
+    height: 50%;
+    background-color: #7289DA;
+    color: white
+}
+
+/* Modal */
+.modal-content {
+    text-align: center;
+}
+
+.modal-dialog .btn-primary {
+    color: white;
 }
