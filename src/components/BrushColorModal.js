@@ -26,7 +26,13 @@ const BrushColorModal = (props) => {
             className="colorpicker"
           />
           <br />
-          <Button variant="primary" onClick={() => props.selectColor(tempColor)}>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleClose();
+              props.selectColor(tempColor);
+            }}
+          >
             Select
           </Button>
         </Modal.Body>

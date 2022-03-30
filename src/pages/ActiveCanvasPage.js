@@ -13,6 +13,7 @@ const ActiveCanvasPage = () => {
   const selectColor = (color) => {
     // TODO: Set color of brush
     setBrushColor(color);
+    console.log(color);
   };
 
   return (
