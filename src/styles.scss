@@ -1,6 +1,10 @@
 $primary: #7289DA;
 @import "./../node_modules/bootstrap/scss/bootstrap";
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -72,10 +76,42 @@ h2 {
     color: black;
 }
 
+.headerBar {
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    //background: #2C2F33;
+    background: #23272A;
+}
+
+.headerColumn {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+}
+
+.headerRow:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.alignRight {
+    text-align: right;
+}
+
+.alignLeft {
+    text-align: left;
+}
+
+
 /* Active Canvus Page */
 .toolBar {
-    width: 10%;
-    height: 100vh;
+    padding-top: 20px;
+    width: 110px;
+    height: 90%;
     background: #2C2F33;
     //background: #7289DA;
 }
+
+

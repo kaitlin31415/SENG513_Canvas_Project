@@ -28,7 +28,6 @@ class Eraser extends React.Component {
     }
 }
 
-
 class FreeHand extends React.Component {
     render() {
         return (
