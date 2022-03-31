@@ -13,49 +13,49 @@ const AllCanvasesGrid = () => {
     <Container>
       <Row>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
         <Col sm={3} className="mb-3">
-          <CanvasBox canvasName="Canvas #1" />
+          <CanvasBox canvasName="New Canvas" />
         </Col>
       </Row>
     </Container>

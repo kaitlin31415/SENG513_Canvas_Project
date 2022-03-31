@@ -2,13 +2,21 @@ $primary: #7289DA;
 $modal-content-bg: #404449;
 @import "./../node_modules/bootstrap/scss/bootstrap";
 
+/* Color palette (from https://colorswall.com/palette/181) */
+$color-1: #7289da;
+$color-2: #ffffff;
+$color-3: #99aab5;
+$color-4: #2c2f33;
+$color-5: #23272a;
+
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
     color: white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #2C2F33;
+    background-color: $color-4;
 }
 
 .content {
@@ -34,7 +42,7 @@ h2 {
 /* Login Page */
 .login {
     padding: 50px 40px;
-    background: #23272A;
+    background: $color-5;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -46,7 +54,7 @@ h2 {
 /* Sign Up Page */
 .signup {
     padding: 50px 40px;
-    background: #23272A;
+    background: $color-5;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -58,7 +66,7 @@ h2 {
 /* Bounceback Page */
 .bounceback {
     padding: 50px 40px;
-    background: #23272A;
+    background: $color-5;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -83,7 +91,7 @@ h2 {
     padding: 1vw 1vh;
     width: 50%;
     height: 50%;
-    background-color: #7289DA;
+    background-color: $color-1;
     color: white
 }
 
@@ -99,4 +107,17 @@ h2 {
 
 .modal-dialog .btn-primary {
     color: white;
+}
+
+// /* New Canvas Modal */
+// .newCanvas {
+    
+// }
+
+/* Your Canvases header */
+.yourCanvases {
+    background-color: $color-5;
+    padding-top: .5em;
+    padding-bottom: .5em;
+    margin-bottom: 2em;
 }

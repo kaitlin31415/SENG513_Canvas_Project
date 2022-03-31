@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import NewCanvasModal from "./NewCanvasModal";
 import { useNavigate } from "react-router-dom";
 
 const CanvasBox = (props) => {
@@ -18,9 +19,10 @@ const CanvasBox = (props) => {
           <Card.Title>{canvasName}</Card.Title>
         </Card.Body>
       </Card>
-      <Button variant="primary" onClick={openCanvas}>
+      <NewCanvasModal />
+      {/* <Button variant="primary" onClick={openCanvas}>
         Open
-      </Button>
+      </Button> */}
     </div>
   );
 };
