@@ -4,39 +4,48 @@ import BrushColorModal from "../components/BrushColorModal";
 import BrushSizeModal from "../components/BrushSizeModal";
 import ImportCanvasModal from "../components/ImportCanvasModal";
 import ToolBar from "../components/ToolBar";
+import ChatWindow from '../components/ChatWindow'
 import "../styles.scss";
 
 const ActiveCanvasPage = () => {
-  const [showBrushSizeModal, setShowBrushSizeModal] = useState(false);
-  const [showBrushColorModal, setShowBrushColorModal] = useState(false);
-  const [brushColor, setBrushColor] = useState("#ffffff");
+    const [showBrushSizeModal, setShowBrushSizeModal] = useState(false);
+    const [showBrushColorModal, setShowBrushColorModal] = useState(false);
+    const [brushColor, setBrushColor] = useState("#ffffff");
 
-  const selectColor = (color) => {
+    const selectColor = (color) => {
     // TODO: Set color of brush
     setBrushColor(color);
     console.log(color);
-  };
+    };
 
-  return (
-    <div className="activecanvas">
-      <div className="headerBar">
-          <HeaderBar />
-      </div>
+    return (
+        <div className="activeCanvas">
+            <div className="headerBar">
+                <HeaderBar />
+            </div>
 
-      <div className="toolbar">
-        <ToolBar setShowBrushSizeModal={setShowBrushSizeModal} setShowBrushColorModal={setShowBrushColorModal} />
-      </div>
+            <div className="mainBody">
+                <div className="toolbar">
+                    <ToolBar setShowBrushSizeModal={setShowBrushSizeModal} setShowBrushColorModal={setShowBrushColorModal} />
+                </div>
 
-      <ImportCanvasModal />
-      <BrushSizeModal showBrushSizeModal={showBrushSizeModal} setShowBrushSizeModal={setShowBrushSizeModal} />
-      <BrushColorModal
-        showBrushColorModal={showBrushColorModal}
-        setShowBrushColorModal={setShowBrushColorModal}
-        brushColor={brushColor}
-        selectColor={selectColor}
-      />
-    </div>
-  );
+                <div className='canvas'>
+                    <h1>[DUMMY CANVAS]</h1>
+                </div>
+                
+                <ChatWindow />
+            </div>
+
+            <ImportCanvasModal />
+            <BrushSizeModal showBrushSizeModal={showBrushSizeModal} setShowBrushSizeModal={setShowBrushSizeModal} />
+            <BrushColorModal
+            showBrushColorModal={showBrushColorModal}
+            setShowBrushColorModal={setShowBrushColorModal}
+            brushColor={brushColor}
+            selectColor={selectColor}
+            />
+        </div>
+    );
 };
 
 export default ActiveCanvasPage;

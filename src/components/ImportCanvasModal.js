@@ -5,7 +5,7 @@ import jsonFile from "../images/jsonFile.svg"
 import Image from "react-bootstrap/Image";
 
 const ImportCanvasModal = () => {
-    const [show, setShow] = useState(true);
+    const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
 

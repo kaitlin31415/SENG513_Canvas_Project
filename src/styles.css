@@ -11958,6 +11958,11 @@ fieldset:disabled .btn {
 }
 
 /* Color palette (from https://colorswall.com/palette/181) */
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: 'Roboto', sans-serif;
@@ -12034,10 +12039,54 @@ h2, .h2 {
   color: black;
 }
 
+.headerBar {
+  width: 100%;
+  height: 60px;
+  text-align: center;
+  background: #23272a;
+}
+
+.headerColumn {
+  width: 33.33%;
+  padding: 10px;
+}
+
+.headerRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+.headerRow:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.alignRight {
+  padding: 0px 10px;
+  text-align: right;
+}
+
+.alignLeft {
+  padding: 0px 10px;
+  text-align: left;
+}
+
+.mainBody {
+  background-color: red;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 /* Active Canvas Page */
-.activecanvas .toolbar {
-  width: 10%;
-  height: 100vh;
+.toolbar {
+  padding-top: 20px;
+  width: 8%;
+  height: 90%;
+  background: #2c2f33;
 }
 
 .jsonfile {
@@ -12062,11 +12111,76 @@ h2, .h2 {
   color: white;
 }
 
-/* Your Canvases header */
-.yourCanvases {
+/* Active Canvas placeholder */
+.activeCanvas {
+  background-color: white;
+  width: 75%;
+}
+
+/* Chat window */
+.chatWindow {
+  width: 17%;
+  height: 100%;
+}
+
+.chat-top {
+  font-size: 14px;
+}
+
+.chat-mid {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 95%;
+}
+
+.chat-mid-messages {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
   background-color: #23272a;
-  padding-top: .5em;
-  padding-bottom: .5em;
-  margin-bottom: 2em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.chat-bot {
+  height: 5%;
+}
+
+.chat-bot-div {
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 13px;
+  height: 100%;
+}
+
+.chat-bot-form {
+  height: 100%;
+}
+
+.chat-input {
+  background-color: #404449;
+  color: #ffffff;
+  border: none;
+  height: 100%;
+  width: 80%;
+}
+
+.chat-input, chat-input::-webkit-input-placeholder {
+  padding-left: 7px;
+}
+
+.chat-bot-form > button {
+  background: #7289da;
+  color: #ffffff;
+  border: none;
+  height: 100%;
+  width: 20%;
 }
 /*# sourceMappingURL=styles.css.map */
