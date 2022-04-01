@@ -3,7 +3,7 @@ import {Home, Import, Export, Share} from "./HeaderButton";
 import "../styles.scss";
 
 
-const HeaderBar = () => {
+const HeaderBar = (props) => {
     return (
         <div className="headerRow">
             <div className="headerColumn">
@@ -14,9 +14,9 @@ const HeaderBar = () => {
             </div>
             <div className="headerColumn">
                 <div className="alignRight">
-                    <Import />
-                    <Export /> 
-                    <Share /> 
+                    <Import /> {" "}
+                    <Export /> {" "}
+                    <Share />
                 </div>
             </div>
         </div>

@@ -54,7 +54,6 @@ class Share extends React.Component {
 }
 
 
-
 export {
     Logout,
     Home,

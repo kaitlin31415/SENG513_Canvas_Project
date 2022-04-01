@@ -13,7 +13,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/bounceback" element={<BounceBackPage />} />
         <Route path="/allcanvases" element={<AllCanvasesPage />} />
-        <Route path="/ActiveCanvusPage" element={<ActiveCanvasPage />} />
+        <Route path="/canvas" element={<ActiveCanvasPage />} />
         <Route
           path="*"
           element={

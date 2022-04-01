@@ -8,24 +8,28 @@ import {
 import "../styles.scss";
 
 
-const ToolBar = () => {
+const ToolBar = (props) => {
     return (
-        <div className="text-center">
-            <BrushSize />
-            <p>Brush Size</p>
+        <div className="ToolButton">
+            <div className="text-center">
+                <BrushSize setShowBrushSizeModal={props.setShowBrushSizeModal} />
+                <p>Brush Size</p>
 
-            <Eraser />
-            <p>Eraser</p>
+                <Eraser />
+                <p>Eraser</p>
+  
+                <FreeHand />
+                <p>Free Hand</p>
 
-            <FreeHand />
-            <p>Free Hand</p>
+                <AddStickyNote />
+                <p>Add Sticky Note</p>
 
-            <AddStickyNote />
-            <p>Add Sticky Note</p>
-
-            <ChangeBrushColour />
-            <p>Change Brush Colour</p>
+                <ChangeBrushColour setShowBrushColorModal={props.setShowBrushColorModal} />
+                <p>Change Brush Colour</p>
+            </div>
         </div>
+
+
     );
 };
 
