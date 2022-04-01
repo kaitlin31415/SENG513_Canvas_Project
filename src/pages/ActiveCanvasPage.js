@@ -9,7 +9,6 @@ import "../styles.scss";
 const ActiveCanvasPage = () => {
   const [showBrushSizeModal, setShowBrushSizeModal] = useState(false);
   const [showBrushColorModal, setShowBrushColorModal] = useState(false);
-  const [showImportCanvasModal, setImportCanvasModal] = useState(false);
   const [brushColor, setBrushColor] = useState("#ffffff");
 
   const selectColor = (color) => {
@@ -28,6 +27,7 @@ const ActiveCanvasPage = () => {
         <ToolBar setShowBrushSizeModal={setShowBrushSizeModal} setShowBrushColorModal={setShowBrushColorModal} />
       </div>
 
+      <ImportCanvasModal />
       <BrushSizeModal showBrushSizeModal={showBrushSizeModal} setShowBrushSizeModal={setShowBrushSizeModal} />
       <BrushColorModal
         showBrushColorModal={showBrushColorModal}

@@ -9,6 +9,7 @@ $color-3: #99aab5;
 $color-4: #2c2f33;
 $color-5: #23272a;
 
+
 * {
     box-sizing: border-box;
 }
@@ -84,6 +85,7 @@ h2 {
     color: black;
 }
 
+
 .headerBar {
     width: 100%;
     height: 60px;
@@ -113,9 +115,6 @@ h2 {
         text-align: left;
     }
 
-    .gap{
-        padding-right: 1px;
-    }
 
 /* Active Canvas Page */
 .activecanvas .toolbar {
@@ -123,7 +122,6 @@ h2 {
     width: 110px;
     height: 90%;
     background: $color-4;
-}
 
 .jsonfile {
     padding: 1vw 1vh;
