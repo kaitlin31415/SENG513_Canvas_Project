@@ -20,7 +20,7 @@ const ActiveCanvasPage = () => {
   return (
     <div className="activecanvas">
       <div className="headerBar">
-          <HeaderBar setImportCanvasModal={setImportCanvasModal}/>
+          <HeaderBar />
       </div>
 
       <div className="toolbar">
