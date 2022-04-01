@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import HeaderBar from "../components/ActiveCanvasHeader";
 import BrushColorModal from "../components/BrushColorModal";
 import BrushSizeModal from "../components/BrushSizeModal";
 import ImportCanvasModal from "../components/ImportCanvasModal";
@@ -18,9 +19,14 @@ const ActiveCanvasPage = () => {
 
   return (
     <div className="activecanvas">
+      <div className="headerBar">
+          <HeaderBar setImportCanvasModal={setImportCanvasModal}/>
+      </div>
+
       <div className="toolbar">
         <ToolBar setShowBrushSizeModal={setShowBrushSizeModal} setShowBrushColorModal={setShowBrushColorModal} />
       </div>
+
       <ImportCanvasModal />
       <BrushSizeModal showBrushSizeModal={showBrushSizeModal} setShowBrushSizeModal={setShowBrushSizeModal} />
       <BrushColorModal

@@ -10,6 +10,10 @@ $color-4: #2c2f33;
 $color-5: #23272a;
 
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: 'Roboto', sans-serif;
@@ -81,11 +85,43 @@ h2 {
     color: black;
 }
 
+
+.headerBar {
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    background: $color-5;
+}
+
+    .headerColumn {
+        float: left;
+        width: 33.33%;
+        padding: 10px;
+    }
+
+    .headerRow:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .alignRight {
+        padding: 0px 10px;
+        text-align: right;
+    }
+
+    .alignLeft {
+        padding: 0px 10px;
+        text-align: left;
+    }
+
+
 /* Active Canvas Page */
 .activecanvas .toolbar {
-    width: 10%;
-    height: 100vh;
-}
+    padding-top: 20px;
+    width: 110px;
+    height: 90%;
+    background: $color-4;
 
 .jsonfile {
     padding: 1vw 1vh;
@@ -114,10 +150,3 @@ h2 {
     
 // }
 
-/* Your Canvases header */
-.yourCanvases {
-    background-color: $color-5;
-    padding-top: .5em;
-    padding-bottom: .5em;
-    margin-bottom: 2em;
-}

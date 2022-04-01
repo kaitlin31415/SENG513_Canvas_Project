@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import HeaderBar from "../components/AllCanvasHeader";
 import AllCanvasesGrid from "../components/AllCanvasesGrid";
 import NewCanvasModal from "../components/NewCanvasModal";
 
@@ -7,9 +8,12 @@ const AllCanvasesPage = () => {
 
     return (
         <div>
-            <div className='yourCanvases'>
-                <h1>Your Canvases</h1>
+            <div className="headerBar">
+                <HeaderBar />
             </div>
+
+            <br></br>
+
             <AllCanvasesGrid />
         </div>
     )
