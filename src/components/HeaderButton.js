@@ -63,14 +63,12 @@ const Home = () => {
     }
 } */
 
-class Import extends React.Component {
-    render() {
-        return (
-            <Button variant="primary" type="submit">
-                <font color="white"> Import </font>
-            </Button>
-        )
-    }
+const Import = (props) => {
+    return (
+        <Button variant="primary" onClick={() => props.setShowImportCanvasModal(true)}>
+            <font color="white"> Import </font>
+        </Button>
+    )
 }
 
 class Export extends React.Component {

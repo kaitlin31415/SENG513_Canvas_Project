@@ -8,6 +8,7 @@ import ChatWindow from '../components/ChatWindow'
 import "../styles.scss";
 
 const ActiveCanvasPage = () => {
+    const [showImportCanvasModal, setShowImportCanvasModal] = useState(false);
     const [showBrushSizeModal, setShowBrushSizeModal] = useState(false);
     const [showBrushColorModal, setShowBrushColorModal] = useState(false);
     const [brushColor, setBrushColor] = useState("#ffffff");
@@ -21,7 +22,7 @@ const ActiveCanvasPage = () => {
     return (
         <div className="activeCanvas">
             <div className="headerBar">
-                <HeaderBar />
+                <HeaderBar setShowImportCanvasModal={setShowImportCanvasModal} />
             </div>
 
             <div className="mainBody">
@@ -36,7 +37,7 @@ const ActiveCanvasPage = () => {
                 <ChatWindow />
             </div>
 
-            <ImportCanvasModal />
+            <ImportCanvasModal showImportCanvasModal={showImportCanvasModal} setShowImportCanvasModal={setShowImportCanvasModal} />
             <BrushSizeModal showBrushSizeModal={showBrushSizeModal} setShowBrushSizeModal={setShowBrushSizeModal} />
             <BrushColorModal
             showBrushColorModal={showBrushColorModal}
