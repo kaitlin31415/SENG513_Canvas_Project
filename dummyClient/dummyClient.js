@@ -34,6 +34,14 @@ function leaveCanvas(){
 	socket.emit("leaveCanvas", myCanvas);
 }
 
+function addU1toC1(){
+	myInfo = {username: "firstName", canvasId: "theFirstCanvas"}
+	socket.emit("AddUserToCanvas", myInfo);
+}
+function showU1sCanvases(){
+	socket.emit("canvasesPerUser", { username: "firstName"});
+
+}
 
 
 
@@ -74,4 +82,11 @@ socket.on("Successful Creation", (msg) => {
 
 socket.on("updateActiveUserList", (msg) => {
 	console.log("Current Users: " + msg);
+});
+
+socket.on("Added Canvas to User", (msg) => {
+	console.log("Added Users: " + msg);
+});
+socket.on("ShowAllCanvases", (msg) => {
+	console.log("Users Canvases: " + msg);
 });

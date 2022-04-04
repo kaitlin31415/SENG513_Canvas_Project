@@ -162,10 +162,10 @@ async function getAllCanvasPerUser({ username }, url, success_callback) {
 
 		if (err) throw err;
 		var dbo = db.db("Users");
-		var myobj = { canvasId: canvasId };
-		dbo.collection("user_authentication").find({ userName: username }, {}).toArray(function (err, result) {
+		dbo.collection("user_authentication").find({ userName: username }).toArray(function (err, result) {
 			if (err) throw err;
 			db.close();
+			console.log(result)
 			success_callback(result[0].canvases);
 		});
 
@@ -173,7 +173,7 @@ async function getAllCanvasPerUser({ username }, url, success_callback) {
 }
 
 
-async function updateCanvas( canvasId, canvasItems, url) {
+async function updateCanvas(canvasId, canvasItems, url) {
 	// Hash the Password
 	MongoClient.connect(url, function (err, db) {
 		if (err) throw err;
@@ -246,7 +246,7 @@ let socketsToUsers = {}
 
 let current_canvases = {}
 
-function updateActiveUserList(roomName,socket) {
+function updateActiveUserList(roomName, socket) {
 	//Update the active list to all sockets now in the room 
 	console.log(socket.adapter.rooms);
 	console.log(roomName);
@@ -364,7 +364,7 @@ io.on('connection', (socket) => {
 				users: current_canvases[info.canvasId].users,
 			}
 		};
-		
+
 		updateCanvas(info.canvasId, canvas, URI);
 		socket.leave(info.canvasId);
 
@@ -391,17 +391,21 @@ io.on('connection', (socket) => {
 
 
 	socket.on('chat message', (data) => {
-		io.to(data.canvasId).emit("chat message", data.msg);
+		io.to(data.canvasId).emit("chat message", {
+			"message": data.msg,
+			"colour":current_users[socketsToUsers[socket_id]].colour
+		});
 	});
 
 	socket.on('disconnect', () => {
+		//This one still needs debugging
 		//Take the user out of the active users list and socket id list 
 		let name = socketsToUsers[socket.id];
 		delete socketsToUsers[socket.id];
 		delete current_users[name];
 
-		//Update the user list in all canvas' this user is in
-		Object.keys(socket.rooms).forEach(function (room, idx) {
+		//Update the user lists of all rooms
+		Object.keys(socket.adapter.rooms).forEach(function (room, idx) {
 			io.to(room).emit('updateActiveUserList', updateActiveUserList(room, socket))
 		});
 
@@ -418,6 +422,7 @@ io.on('connection', (socket) => {
 	});
 
 	socket.on("AddUserToCanvas", (info) => {
+		console.log("Adding");
 		let success = () => {
 			socket.emit("Added Canvas to User", info);
 		};
@@ -433,7 +438,7 @@ io.on('connection', (socket) => {
 			socket.emit("ShowAllCanvases", canvases);
 		};
 
-		getAllCanvasPerUser({ userName: info.username }, URI, success);
+		getAllCanvasPerUser(info, URI, success);
 
 	});
 
