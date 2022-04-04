@@ -24,7 +24,7 @@ const ToolBar = (props) => {
                 <AddStickyNote />
                 <p>Add Sticky Note</p>
 
-                <ChangeBrushColour setShowBrushColorModal={props.setShowBrushColorModal} />
+                <ChangeBrushColour brush={props.brush} setShowBrushColorModal={props.setShowBrushColorModal} />
                 <p>Change Brush Colour</p>
             </div>
         </div>
