@@ -46,7 +46,12 @@ class AddStickyNote extends React.Component {
 }
 
 const ChangeBrushColour = (props) => {
-  return <Button variant="primary" onClick={() => props.setShowBrushColorModal(true)}></Button>;
+  const Brush = props.brush;
+  return (
+    <Button variant="primary" onClick={() => props.setShowBrushColorModal(true)} >
+      <Brush />
+    </Button>
+  );
 };
 
 export { BrushSize, Eraser, FreeHand, AddStickyNote, ChangeBrushColour };

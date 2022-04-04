@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { Col, Container, Image, Row } from "react-bootstrap";
@@ -23,15 +23,21 @@ const BrushSizeModal = (props) => {
             <Row>
               <Col>
                 <Image src={smallBrush} fluid />
-                Small
+                <Button onClick={() => props.selectBrushSize(10)}>
+                  Small
+                </Button>
               </Col>
               <Col>
                 <Image src={mediumBrush} fluid />
-                Medium
+                <Button onClick={() => props.selectBrushSize(20)}>
+                  Medium
+                </Button>
               </Col>
               <Col>
                 <Image src={largeBrush} fluid />
-                Large
+                <Button onClick={() => props.selectBrushSize(30)}>  
+                  Large
+                </Button>
               </Col>
             </Row>
           </Container>
