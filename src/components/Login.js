@@ -3,8 +3,10 @@ import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../styles.scss";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  let navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,6 +17,7 @@ const Login = () => {
 
   function handleLogin(event) {
     // TODO: Login user
+    navigate('/allcanvases');
   }
 
   return (

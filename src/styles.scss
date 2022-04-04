@@ -1,10 +1,18 @@
 $primary: #7289DA;
+$modal-content-bg: #404449;
 @import "./../node_modules/bootstrap/scss/bootstrap";
 
-// .btn-primary {
-//     color: white;
-//     width: 100%
-// }
+/* Color palette (from https://colorswall.com/palette/181) */
+$color-1: #7289da;
+$color-2: #ffffff;
+$color-3: #99aab5;
+$color-4: #2c2f33;
+$color-5: #23272a;
+
+
+* {
+    box-sizing: border-box;
+}
 
 body {
     margin: 0;
@@ -12,7 +20,7 @@ body {
     color: white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #2C2F33;
+    background-color: $color-4;
 }
 
 .content {
@@ -38,7 +46,7 @@ h2 {
 /* Login Page */
 .login {
     padding: 50px 40px;
-    background: #23272A;
+    background: $color-5;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -50,7 +58,7 @@ h2 {
 /* Sign Up Page */
 .signup {
     padding: 50px 40px;
-    background: #23272A;
+    background: $color-5;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -62,10 +70,186 @@ h2 {
 /* Bounceback Page */
 .bounceback {
     padding: 50px 40px;
-    background: #23272A;
+    background: $color-5;
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .bounceback .btn-primary {
     color: white;
 }
+
+/* All Canvases Page */
+.canvasbox {
+    align-content: center;
+    text-align: center;
+    color: black;
+}
+
+
+.headerBar {
+    width: 100%;
+    height: 7vh;
+    text-align: center;
+    background: $color-5;
+}
+
+    .headerColumn {
+        // float: left;
+        width: 33.33%;
+        padding: 10px;
+    }
+
+    .headerRow {
+        display: flex;
+        // height: 100%;
+    }
+
+    .headerRow:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    .alignRight {
+        padding: 0px 10px;
+        text-align: right;
+    }
+
+    .alignLeft {
+        padding: 0px 10px;
+        text-align: left;
+    }
+
+
+// .activeCanvas {
+//     display: flex;
+//     flex-direction: column;
+// }
+
+
+.mainBody {
+    //background-color: red;
+    display: flex;
+    height: 93vh;
+}
+
+/* Active Canvas Page */
+.toolbar {
+    padding-top: 20px;
+    width: 6%;
+    margin-left: 10px;
+    margin-right: 10px;
+    //height: 90%;
+    background: $color-4;
+}
+
+.jsonfile {
+    padding: 1vw 1vh;
+    width: 50%;
+    height: 50%;
+    background-color: $color-1;
+    color: white
+}
+
+/* Brush Color Modal */
+.colorpicker {
+    width: 100% !important;
+}
+
+/* Modal */
+.modal-content {
+    text-align: center;
+}
+
+.modal-dialog .btn-primary {
+    color: white;
+}
+
+
+/* Active Canvas placeholder */
+.canvas {
+    background-color: white;
+    color: black;
+    flex: 2;
+    padding-top: 200px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+/* Chat window */
+.chatWindow {
+    // background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 17%;
+    height: 93vh;
+    // margin: auto;
+}
+
+.chat-top {
+    // background-color: red;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.chat-mid {
+    // background-color: blue;
+    display: flex;
+    height: 95%;
+}
+
+    .chat-mid-messages {
+        flex-direction: column-reverse;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        width: 100%;
+        height: 100%;
+        margin-left: 10px;
+        margin-right: 10px;
+        background-color: $color-5;
+        box-sizing: border-box;
+    }
+
+
+.chat-bot {
+    // background-color: green;
+    height: 5%;
+    margin-bottom: 10px;
+}
+
+    .chat-bot-div {
+        margin-left: 10px;
+        margin-right: 10px;
+        font-size: 14px;
+        height: 100%;
+    }
+
+    .chat-bot-form {
+        height: 100%;
+    }
+
+    .chat-input {
+        background-color: #404449;
+        color: $color-2;
+        border: none;
+        height: 100%;
+        width: 80%;
+    }
+
+    .chat-input:focus {
+        outline: none;
+    }
+
+    .chat-input, chat-input::-webkit-input-placeholder {
+        padding-left: 7px;
+    }
+
+    .chat-bot-form > button {
+        background: $color-1;
+        color: $color-2;
+        border: none;
+        height: 100%;
+        width: 20%;
+    }
