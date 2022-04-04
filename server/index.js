@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-const URI = "mongodb+srv://kaitlin_seng513:seng513_database@cluster0.2idwj.mongodb.net/";
+const URI = "mongodb+srv://kaitlin_seng513:PASSWORD@cluster0.2idwj.mongodb.net/";
 const bcrypt = require('bcryptjs');
 
 //https://stackoverflow.com/questions/36513175/accessing-mongodb-outside-of-connection-callback
