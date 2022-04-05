@@ -36,7 +36,7 @@ const ActiveCanvasPage = () => {
                 <ChatWindow />
             </div>
 
-            <ImportCanvasModal />
+            {/* <ImportCanvasModal /> */}
             <BrushSizeModal showBrushSizeModal={showBrushSizeModal} setShowBrushSizeModal={setShowBrushSizeModal} />
             <BrushColorModal
             showBrushColorModal={showBrushColorModal}

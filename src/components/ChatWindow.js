@@ -12,7 +12,20 @@ const ChatWindow = () => {
             
             <div className='chat-mid'>
                 <div className='chat-mid-messages'>
-                    <ul class="messages"></ul>
+                    <ul class='chat-messages'>
+                        <li>
+                            <span style={{ color: 'yellow' }}>User1</span>: This is a placeholder message.
+                        </li>
+                        <li>
+                            <span style={{ color: 'magenta' }}>User2</span>: Hello World!
+                        </li>
+                        <li style={{ color: 'grey' }}>
+                            User3 has joined the canvas.
+                        </li>
+                        <li>
+                            <span style={{ color: 'green' }}>User3</span>: My name is User3.
+                        </li>
+                    </ul>
                 </div>
             </div>
 

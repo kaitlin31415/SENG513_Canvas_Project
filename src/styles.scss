@@ -201,6 +201,7 @@ h2 {
 }
 
     .chat-mid-messages {
+        display: flex;
         flex-direction: column-reverse;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -210,6 +211,21 @@ h2 {
         margin-right: 10px;
         background-color: $color-5;
         box-sizing: border-box;
+    }
+
+    .chat-messages {
+        list-style-type: none;
+        list-style-position: inside;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .chat-messages > li {
+        padding-left: .7em;
+        padding-bottom: 0.5em;
+        display: block;
+        word-break: break-word;
+        white-space: normal;
     }
 
 
@@ -253,3 +269,10 @@ h2 {
         height: 100%;
         width: 20%;
     }
+
+    .chat-bot-form > button:hover {
+        background: #85a0ff;
+        transition-duration: 300ms;
+    }
+
+    // #7289da
