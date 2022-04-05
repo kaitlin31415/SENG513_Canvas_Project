@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../styles.scss";
 import { useNavigate } from "react-router-dom";
+import { SocketContext } from '../context/socket';
 
 const Login = () => {
+  const socket = useContext(SocketContext);
+
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -16,9 +19,18 @@ const Login = () => {
   }
 
   function handleLogin(event) {
-    // TODO: Login user
+    event.preventDefault();
+    let myUser = { "username": "firstName", "password": "firstPassword" }
+    console.log(socket);
+    socket.emit('log in', myUser);
     navigate('/allcanvases');
   }
+
+  useEffect(() => {
+    socket.on('Successful Authentication', (username) => {
+        console.log("Successful!")
+    })
+  }, [socket]);
 
   return (
     <div className="login">
