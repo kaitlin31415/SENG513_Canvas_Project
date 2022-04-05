@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-const URI = "mongodb+srv://kaitlin_seng513:PASSWORD@cluster0.2idwj.mongodb.net/";
+const URI = "mongodb+srv://kaitlin_seng513:seng513_database_1@cluster0.2idwj.mongodb.net/";
 const bcrypt = require('bcryptjs');
 
 //https://stackoverflow.com/questions/36513175/accessing-mongodb-outside-of-connection-callback
@@ -298,6 +298,7 @@ io.on('connection', (socket) => {
 		authenticate(user_info, URI, foundUser, noUser)
 
 	});
+
 	socket.on('Update colour', (colour) => {
 		current_users[socketsToUsers[socket_id]]['colour'] = colour;
 		// DEBUG
@@ -357,7 +358,6 @@ io.on('connection', (socket) => {
 		// Add the user to the canvas List 
 	});
 
-
 	socket.on('leaveCanvas', (info) => {
 		//Get the canvas at canvas Id
 		console.log(current_canvases)
@@ -377,7 +377,6 @@ io.on('connection', (socket) => {
 		io.to(info.canvasId).emit('updateActiveUserList', updateActiveUserList(info.canvasId, socket))
 	});
 
-
 	socket.on('Drawing', (data) => {
 		let d =
 		{
@@ -394,12 +393,16 @@ io.on('connection', (socket) => {
 
 	});
 
+	// socket.on('chat message', (data) => {
+	// 	io.to(data.canvasId).emit("chat message", {
+	// 		"message": data.msg,
+	// 		"colour":current_users[socketsToUsers[socket_id]].colour
+	// 	});
+	// });
 
-	socket.on('chat message', (data) => {
-		io.to(data.canvasId).emit("chat message", {
-			"message": data.msg,
-			"colour":current_users[socketsToUsers[socket_id]].colour
-		});
+	// temporary
+	socket.on('chat message', (user, msg) => {
+		io.emit('new message', user, msg);
 	});
 
 	socket.on('disconnect', () => {
