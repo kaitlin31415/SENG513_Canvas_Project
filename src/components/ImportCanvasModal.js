@@ -4,14 +4,12 @@ import Button from "react-bootstrap/Button";
 import jsonFile from "../images/jsonFile.svg"
 import Image from "react-bootstrap/Image";
 
-const ImportCanvasModal = () => {
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
+const ImportCanvasModal = (props) => {
+    const handleClose = () => props.setShowImportCanvasModal(false);
 
     return (
         <div>
-            <Modal show={show} backdrop="static" onHide={handleClose} centered>
+            <Modal show={props.showImportCanvasModal} backdrop="static" onHide={handleClose} centered>
                 <Modal.Header>
                     <Modal.Title>Import Canvas</Modal.Title>
                     <Button variant="primary" onClick={handleClose}>

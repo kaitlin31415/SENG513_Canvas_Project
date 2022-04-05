@@ -63,34 +63,28 @@ const Home = () => {
     }
 } */
 
-class Import extends React.Component {
-    render() {
-        return (
-            <Button variant="primary" type="submit">
-                <font color="white"> Import </font>
-            </Button>
-        )
-    }
+const Import = (props) => {
+    return (
+        <Button variant="primary" onClick={() => props.setShowImportCanvasModal(true)}>
+            <font color="white"> Import </font>
+        </Button>
+    )
 }
 
-class Export extends React.Component {
-    render() {
-        return (
-            <Button variant="primary" type="submit">
-                <font color="white"> Export </font>
-            </Button>
-        )
-    }
+const Export = (props) => {
+    return (
+        <Button variant="primary" onClick={() => props.setShowExportCanvasModal(true)}>
+            <font color="white"> Export </font>
+        </Button>
+    )
 }
 
-class Share extends React.Component {
-    render() {
-        return (
-            <Button variant="primary" type="submit">
-                <font color="white"> Share </font>
-            </Button>
-        )
-    }
+const Share = (props) => {
+    return (
+        <Button variant="primary" onClick={() => props.setShowShareCanvasModal(true)}>
+            <font color="white"> Share </font>
+        </Button>
+    )
 }
 
 

@@ -14,9 +14,9 @@ const HeaderBar = (props) => {
             </div>
             <div className="headerColumn">
                 <div className="alignRight">
-                    <Import /> {" "}
-                    <Export /> {" "}
-                    <Share />
+                    <Import setShowImportCanvasModal={props.setShowImportCanvasModal} /> {" "}
+                    <Export setShowExportCanvasModal={props.setShowExportCanvasModal} /> {" "}
+                    <Share setShowShareCanvasModal={props.setShowShareCanvasModal} />
                 </div>
             </div>
         </div>
