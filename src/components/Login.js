@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -19,10 +19,18 @@ const Login = () => {
   }
 
   function handleLogin(event) {
+    event.preventDefault();
     let myUser = { "username": "firstName", "password": "firstPassword" }
-    socket.emit('log in', myUser)
-    // navigate('/allcanvases');
+    console.log(socket);
+    socket.emit('log in', myUser);
+    navigate('/allcanvases');
   }
+
+  useEffect(() => {
+    socket.on('Successful Authentication', (username) => {
+        console.log("Successful!")
+    })
+  }, [socket]);
 
   return (
     <div className="login">
