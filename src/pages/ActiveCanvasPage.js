@@ -3,13 +3,18 @@ import HeaderBar from "../components/ActiveCanvasHeader";
 import BrushColorModal from "../components/BrushColorModal";
 import BrushSizeModal from "../components/BrushSizeModal";
 import ImportCanvasModal from "../components/ImportCanvasModal";
+import ExportCanvasModal from "../components/ExportCanvasModal";
+import ShareCanvasModal from "../components/ShareCanvasModal";
 import ToolBar from "../components/ToolBar";
 import ChatWindow from '../components/ChatWindow'
 import Brush from "../components/Brush";
 import "../styles.scss";
 
+
 const ActiveCanvasPage = () => {
     const [showImportCanvasModal, setShowImportCanvasModal] = useState(false);
+    const [showExportCanvasModal, setShowExportCanvasModal] = useState(false);
+    const [showShareCanvasModal, setShowShareCanvasModal] = useState(false);
     const [showBrushSizeModal, setShowBrushSizeModal] = useState(false);
     const [showBrushColorModal, setShowBrushColorModal] = useState(false);
     const [brushSize, setBrushSize] = useState(10);
@@ -34,7 +39,7 @@ const ActiveCanvasPage = () => {
     return (
         <div className="activeCanvas">
             <div className="headerBar">
-                <HeaderBar setShowImportCanvasModal={setShowImportCanvasModal} />
+                <HeaderBar setShowImportCanvasModal={setShowImportCanvasModal} setShowExportCanvasModal={setShowExportCanvasModal} setShowShareCanvasModal={setShowShareCanvasModal}/>
             </div>
 
             <div className="mainBody">
@@ -50,6 +55,8 @@ const ActiveCanvasPage = () => {
             </div>
 
             <ImportCanvasModal showImportCanvasModal={showImportCanvasModal} setShowImportCanvasModal={setShowImportCanvasModal} />
+            <ExportCanvasModal showExportCanvasModal={showExportCanvasModal} setShowExportCanvasModal={setShowExportCanvasModal} />
+            <ShareCanvasModal showShareCanvasModal={showShareCanvasModal} setShowShareCanvasModal={setShowShareCanvasModal} />
             <BrushSizeModal showBrushSizeModal={showBrushSizeModal} setShowBrushSizeModal={setShowBrushSizeModal} selectBrushSize={selectBrushSize} />
             <BrushColorModal
                 showBrushColorModal={showBrushColorModal}
