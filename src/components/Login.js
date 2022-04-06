@@ -5,9 +5,11 @@ import Form from "react-bootstrap/Form";
 import "../styles.scss";
 import { useNavigate } from "react-router-dom";
 import { SocketContext } from '../context/socket';
+import { UserContext } from "../context/user";
 
 const Login = () => {
   const socket = useContext(SocketContext);
+  const { user, setUser } = useContext(UserContext);
 
   let navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -23,12 +25,13 @@ const Login = () => {
     let myUser = { "username": "firstName", "password": "firstPassword" }
     console.log(socket);
     socket.emit('log in', myUser);
-    navigate('/allcanvases');
   }
 
   useEffect(() => {
     socket.on('Successful Authentication', (username) => {
-        console.log("Successful!")
+        console.log("Successful!");
+        setUser(username);
+        navigate('/allcanvases');
     })
   }, [socket]);
 
