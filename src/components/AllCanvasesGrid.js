@@ -8,7 +8,7 @@ const AllCanvasesGrid = (props) => {
   return (
     <Container>
       <Row>
-        {!props.canvases && props.canvases.map((canvas) => {
+        {props.canvases != null && props.canvases.map((canvas) => {
           return (
             <Col sm={3} className="mb-3" key={canvas}>
               <CanvasBox canvasName={canvas} newCanvas={false} />

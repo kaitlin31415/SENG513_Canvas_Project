@@ -391,16 +391,9 @@ io.on('connection', (socket) => {
 
 	});
 
-	// socket.on('chat message', (data) => {
-	// 	io.to(data.canvasId).emit("chat message", {
-	// 		"message": data.msg,
-	// 		"colour":current_users[socketsToUsers[socket_id]].colour
-	// 	});
-	// });
 
-	// temporary
-	socket.on('chat message', (user, msg) => {
-		io.emit('new message', user, msg);
+	socket.on('chat message', (info, msg) => {
+		io.in(info.canvasId).emit('new message', info, msg);
 	});
 
 	socket.on('disconnect', () => {

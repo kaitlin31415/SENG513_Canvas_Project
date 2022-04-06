@@ -47,8 +47,8 @@ const ActiveCanvasPage = () => {
   /* -------- Chat window functions -------- */
 
   const handleSendMsg = (msg) => {
-    let user = { username: "User1", color: brushColor };
-    socket.emit("chat message", user, msg);
+    let info = { canvasId: canvasId, username: user, color: brushColor };
+    socket.emit("chat message", info, msg);
     document.getElementById("chat-input").value = "";
   };
 
