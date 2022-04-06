@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import HeaderBar from "../components/ActiveCanvasHeader";
 import BrushColorModal from "../components/BrushColorModal";
 import BrushSizeModal from "../components/BrushSizeModal";
@@ -9,14 +9,18 @@ import ToolBar from "../components/ToolBar";
 import ChatWindow from '../components/ChatWindow'
 import Brush from "../components/Brush";
 import "../styles.scss";
+import { SocketContext } from '../context/socket';
 
 
 const ActiveCanvasPage = () => {
+    const socket = useContext(SocketContext);
+
     const [showImportCanvasModal, setShowImportCanvasModal] = useState(false);
     const [showExportCanvasModal, setShowExportCanvasModal] = useState(false);
     const [showShareCanvasModal, setShowShareCanvasModal] = useState(false);
     const [showBrushSizeModal, setShowBrushSizeModal] = useState(false);
     const [showBrushColorModal, setShowBrushColorModal] = useState(false);
+
     const [brushSize, setBrushSize] = useState(10);
     const [brushColor, setBrushColor] = useState("#ffffff");
 
@@ -36,6 +40,29 @@ const ActiveCanvasPage = () => {
         )
     }
 
+
+    /* -------- Chat window functions -------- */
+    
+    const handleSendMsg = (msg) => {
+        let user = { username: 'User1', color: brushColor }
+        socket.emit('chat message', user, msg);
+        document.getElementById('chat-input').value = ''
+    }
+
+    const colorText = (color, text) => {
+        return `<span style='color: ${color}'>${text}</span>`
+    }
+
+    useEffect(() => {
+        socket.on('new message', (user, msg) => {
+            console.log(`${user.username} sent: ${msg}`)
+            let item = document.createElement('li')
+            item.innerHTML = `${colorText(user.color, user.username)}: ${msg}`
+            document.getElementById('chat-messages').appendChild(item)
+        })
+    }, [socket]);
+
+    
     return (
         <div className="activeCanvas">
             <div className="headerBar">
@@ -51,7 +78,7 @@ const ActiveCanvasPage = () => {
                     <h1>[DUMMY CANVAS]</h1>
                 </div>
 
-                <ChatWindow />
+                <ChatWindow handleSendMsg={handleSendMsg} />
             </div>
 
             <ImportCanvasModal showImportCanvasModal={showImportCanvasModal} setShowImportCanvasModal={setShowImportCanvasModal} />
@@ -69,3 +96,4 @@ const ActiveCanvasPage = () => {
 };
 
 export default ActiveCanvasPage;
+ 

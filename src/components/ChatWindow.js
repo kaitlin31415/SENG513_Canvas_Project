@@ -1,7 +1,26 @@
-import { useState } from 'react'
-// import Button from 'react-bootstrap/Button'
+import React, { useState, useContext, useEffect } from "react";
 
-const ChatWindow = () => {
+const ChatWindow = (props) => {
+    const [inputVal, setInputVal] = useState('')
+    
+    // true if input is not whitespace
+    const valid = (input) => {
+        if (input && input.trim().length > 0) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    // if msg is valid, send message
+    const sendMessage = (e, msg) => {
+        e.preventDefault()
+        if (valid(msg)) {
+            props.handleSendMsg(msg)
+            setInputVal('')
+        }
+    }
+    
     return (
         <div className='chatWindow'>
             <div className='chat-top'>
@@ -11,16 +30,16 @@ const ChatWindow = () => {
             </div>
             
             <div className='chat-mid'>
-                <div className='chat-mid-messages'>
-                    <ul class="messages"></ul>
+                <div className='chat-div-messages'>
+                    <ul id='chat-messages' />
                 </div>
             </div>
 
             <div className='chat-bot'>
                 <div className='chat-bot-div'>
-                    <form class='chat-bot-form' action=''>
-                        <input class='chat-input' autocomplete='off' placeholder='Send a message...' />
-                        <button onClick={(e) => {e.preventDefault()}}>Send</button>
+                    <form className='chat-bot-form' action=''>
+                        <input id='chat-input' autoComplete='off' placeholder='Send a message...' value={inputVal} onChange={e => setInputVal(e.target.value)} />
+                        <button type='submit' onClick={e => sendMessage(e, inputVal)}>Send</button>
                     </form>
                 </div>
             </div>

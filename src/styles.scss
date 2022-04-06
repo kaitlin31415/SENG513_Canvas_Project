@@ -131,6 +131,8 @@ h2 {
     //background-color: red;
     display: flex;
     height: 93vh;
+    width: 100%;
+    position: fixed;
 }
 
 /* Active Canvas Page */
@@ -187,12 +189,13 @@ h2 {
 
 /* Chat window */
 .chatWindow {
-    // background-color: white;
     display: flex;
     flex-direction: column;
-    width: 17%;
-    height: 93vh;
-    // margin: auto;
+    width: 15%;
+    //height: 93vh;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .chat-top {
@@ -200,36 +203,51 @@ h2 {
     font-size: 14px;
     padding-top: 5px;
     padding-bottom: 5px;
+    height: 3.4%;
 }
 
 .chat-mid {
     // background-color: blue;
     display: flex;
-    height: 95%;
+    height: 92.6%;
 }
 
-    .chat-mid-messages {
+    .chat-div-messages {
+        display: flex;
         flex-direction: column-reverse;
+        float: left;
         overflow-y: scroll;
         overflow-x: hidden;
         width: 100%;
-        height: 100%;
-        margin-left: 10px;
-        margin-right: 10px;
+        // margin-left: 10px;
+        // margin-right: 10px;
         background-color: $color-5;
         box-sizing: border-box;
+        position: relative;
+    }
+
+    #chat-messages {
+        list-style-type: none;
+        list-style-position: inside;
+        margin: 0;
+        padding: 0;
+    }
+    
+    #chat-messages > li {
+        padding-left: .7em;
+        padding-bottom: 0.5em;
+        display: block;
+        word-break: break-word;
+        white-space: normal;
     }
 
 
 .chat-bot {
     // background-color: green;
-    height: 5%;
-    margin-bottom: 10px;
+    height: 4%;
 }
 
     .chat-bot-div {
-        margin-left: 10px;
-        margin-right: 10px;
         font-size: 14px;
         height: 100%;
     }
@@ -238,7 +256,7 @@ h2 {
         height: 100%;
     }
 
-    .chat-input {
+    #chat-input {
         background-color: #404449;
         color: $color-2;
         border: none;
@@ -246,11 +264,11 @@ h2 {
         width: 80%;
     }
 
-    .chat-input:focus {
+    #chat-input:focus {
         outline: none;
     }
 
-    .chat-input, chat-input::-webkit-input-placeholder {
+    #chat-input, chat-input::-webkit-input-placeholder {
         padding-left: 7px;
     }
 
@@ -261,3 +279,10 @@ h2 {
         height: 100%;
         width: 20%;
     }
+
+    .chat-bot-form > button:hover {
+        background: #85a0ff;
+        transition-duration: 300ms;
+    }
+
+    // #7289da
