@@ -1,21 +1,15 @@
 //import React, { useState } from "react";
+import {Navbar, Nav} from "react-bootstrap";
 import {Logout,} from "./HeaderButton";
 import "../styles.scss";
 
 
 const HeaderBar = () => {
     return (
-        <div className="headerRow">
-            <div className="headerColumn">
-                {/* Empty */}
-            </div>
-            <div className="headerColumn">
-                <h1> Your Canvases </h1>
-            </div>
-            <div className="headerColumn">
-                <div className="alignRight"><Logout /></div>
-            </div>
-        </div>
+        <Navbar expand="lg" bg="dark" variant="dark">
+            <Nav className="m-auto"><h1> Your Canvases</h1></Nav>
+            <Nav style={{marginRight: "20px"}}> <Logout /> </Nav> 
+        </Navbar>
     );
 };
 
