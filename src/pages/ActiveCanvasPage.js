@@ -10,6 +10,7 @@ import ChatWindow from "../components/ChatWindow";
 import Brush from "../components/Brush";
 import "../styles.scss";
 import { SocketContext } from "../context/socket";
+import { UserContext } from "../context/user";
 import { useParams } from "react-router-dom";
 
 const ActiveCanvasPage = () => {
@@ -17,6 +18,8 @@ const ActiveCanvasPage = () => {
 
   const canvasId = params.id;
   const socket = useContext(SocketContext);
+
+  const { user, setUser } = useContext(UserContext);
 
   const [showImportCanvasModal, setShowImportCanvasModal] = useState(false);
   const [showExportCanvasModal, setShowExportCanvasModal] = useState(false);
