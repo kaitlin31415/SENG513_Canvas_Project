@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-const URI = "mongodb+srv://kaitlin_seng513:PASSWORD@cluster0.2idwj.mongodb.net/";
+const URI = "mongodb+srv://kaitlin_seng513:seng513_database_1@cluster0.2idwj.mongodb.net/";
 const bcrypt = require('bcryptjs');
 
 //https://stackoverflow.com/questions/36513175/accessing-mongodb-outside-of-connection-callback
@@ -195,11 +195,10 @@ async function addCanvasToUser(username, canvasId, url, success_callback, no_use
 
 		if (err) throw err;
 		var dbo = db.db("Users");
-		dbo.collection("user_authentication").find({ userName: username }, {}).toArray(function (err, result) {
+        dbo.collection("user_authentication").findOne({ userName: username }, function (err, result) {
 			if (err) throw err;
 			db.close();
 
-			//if no user 
 			if (result.length != 0) {
 				let canvases = [];
 				if ("canvases" in result) {
@@ -222,7 +221,6 @@ async function addCanvasToUser(username, canvasId, url, success_callback, no_use
 				no_user_exists_callback();
 			}
 		});
-
 	});
 }
 
@@ -341,7 +339,7 @@ io.on('connection', (socket) => {
 			let createCanvasObject = (result) => {
 				// create canvas object and add it to the current list
 				current_canvases[canvas_info.canvasId] = new Canvas(canvas_info.canvasId, result.canvasInfo);
-
+                socket.emit("Render Canvas", current_canvases[canvas_info.canvasId].objForClient())
 				console.log(current_canvases[canvas_info.canvasId]);
 				if (!(socketsToUsers[socket.id] in current_canvases[canvas_info.canvasId].users)) {
 					current_canvases[canvas_info.canvasId].users.push(socketsToUsers[socket.id]);
