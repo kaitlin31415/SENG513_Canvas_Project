@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "react-bootstrap/Button";
 import "../styles.scss";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../context/user";
 
 // Logout button
 const Logout = () => {
     let navigate = useNavigate();
+    const { user, setUser } = useContext(UserContext);
 
     // goto login page
     const handleLogout = () => {
-        navigate('/')
+        setUser("");
+        navigate('/');
     }
 
     return (

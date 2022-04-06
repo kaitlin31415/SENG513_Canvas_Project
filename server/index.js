@@ -195,11 +195,10 @@ async function addCanvasToUser(username, canvasId, url, success_callback, no_use
 
 		if (err) throw err;
 		var dbo = db.db("Users");
-		dbo.collection("user_authentication").find({ userName: username }, {}).toArray(function (err, result) {
+        dbo.collection("user_authentication").findOne({ userName: username }, function (err, result) {
 			if (err) throw err;
 			db.close();
 
-			//if no user 
 			if (result.length != 0) {
 				let canvases = [];
 				if ("canvases" in result) {
@@ -222,7 +221,6 @@ async function addCanvasToUser(username, canvasId, url, success_callback, no_use
 				no_user_exists_callback();
 			}
 		});
-
 	});
 }
 
@@ -233,9 +231,14 @@ const http = require('http');
 const server = http.createServer(app);
 
 const { Server } = require("socket.io");
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"],
+      },
+});
 
-app.use(express.static('../dummyClient'))
+// app.use(express.static('../dummyClient'))
 
 server.listen(2222, () => {
 	console.log('listening on *:2222');
@@ -293,6 +296,7 @@ io.on('connection', (socket) => {
 		authenticate(user_info, URI, foundUser, noUser)
 
 	});
+
 	socket.on('Update colour', (colour) => {
 		current_users[socketsToUsers[socket_id]]['colour'] = colour;
 		// DEBUG
@@ -335,7 +339,7 @@ io.on('connection', (socket) => {
 			let createCanvasObject = (result) => {
 				// create canvas object and add it to the current list
 				current_canvases[canvas_info.canvasId] = new Canvas(canvas_info.canvasId, result.canvasInfo);
-
+                socket.emit("Render Canvas", current_canvases[canvas_info.canvasId].objForClient())
 				console.log(current_canvases[canvas_info.canvasId]);
 				if (!(socketsToUsers[socket.id] in current_canvases[canvas_info.canvasId].users)) {
 					current_canvases[canvas_info.canvasId].users.push(socketsToUsers[socket.id]);
@@ -351,7 +355,6 @@ io.on('connection', (socket) => {
 		}
 		// Add the user to the canvas List 
 	});
-
 
 	socket.on('leaveCanvas', (info) => {
 		//Get the canvas at canvas Id
@@ -372,7 +375,6 @@ io.on('connection', (socket) => {
 		io.to(info.canvasId).emit('updateActiveUserList', updateActiveUserList(info.canvasId, socket))
 	});
 
-
 	socket.on('Drawing', (data) => {
 		let d =
 		{
@@ -389,12 +391,16 @@ io.on('connection', (socket) => {
 
 	});
 
+	// socket.on('chat message', (data) => {
+	// 	io.to(data.canvasId).emit("chat message", {
+	// 		"message": data.msg,
+	// 		"colour":current_users[socketsToUsers[socket_id]].colour
+	// 	});
+	// });
 
-	socket.on('chat message', (data) => {
-		io.to(data.canvasId).emit("chat message", {
-			"message": data.msg,
-			"colour":current_users[socketsToUsers[socket_id]].colour
-		});
+	// temporary
+	socket.on('chat message', (user, msg) => {
+		io.emit('new message', user, msg);
 	});
 
 	socket.on('disconnect', () => {

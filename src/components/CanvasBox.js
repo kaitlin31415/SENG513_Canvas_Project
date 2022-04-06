@@ -7,22 +7,35 @@ import { useNavigate } from "react-router-dom";
 const CanvasBox = (props) => {
   let navigate = useNavigate();
   const canvasName = props.canvasName;
+  const newCanvas = props.newCanvas;
 
   function openCanvas() {
-      // TODO: Navigate to "/${canvasId}"
+    navigate(`/canvas/${canvasName}`);
   }
 
   return (
     <div className="canvasbox">
-      <Card className="canvasbox mb-2">
-        <Card.Body>
-          <Card.Title>{canvasName}</Card.Title>
-        </Card.Body>
-      </Card>
-      <NewCanvasModal />
-      {/* <Button variant="primary" onClick={openCanvas}>
-        Open
-      </Button> */}
+      {newCanvas ? (
+        <>
+          <Card className="canvasbox mb-2">
+            <Card.Body>
+              <Card.Title>New Canvas</Card.Title>
+            </Card.Body>
+          </Card>
+          <NewCanvasModal />
+        </>
+      ) : (
+        <>
+          <Card className="canvasbox mb-2">
+            <Card.Body>
+              <Card.Title>{canvasName}</Card.Title>
+            </Card.Body>
+          </Card>
+          <Button variant="primary" onClick={openCanvas}>
+            Open
+          </Button>
+        </>
+      )}
     </div>
   );
 };

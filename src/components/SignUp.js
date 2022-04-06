@@ -1,21 +1,42 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Image from "react-bootstrap/Image";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import "../styles.scss";
+import { SocketContext } from "../context/socket";
+import { UserContext } from "../context/user";
+import { useNavigate } from "react-router-dom";
+import { Toast, ToastContainer } from "react-bootstrap";
 
 const SignUp = () => {
+  let navigate = useNavigate();
+
+  const socket = useContext(SocketContext);
+  const { user, setUser } = useContext(UserContext);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  function validateForm() {
-    // TODO: Validate username and password
-    return true;
-  }
+  const [show, setShow] = useState(false);
 
   function handleSignUp(event) {
-    // TODO: Sign up user
+    event.preventDefault();
+    const userInfo = {
+      username: username,
+      password: password,
+    };
+    socket.emit("checkAndAddUsername", userInfo);
   }
+
+  useEffect(() => {
+    socket.on("Successful Creation", (username) => {
+      setUser(username);
+      navigate("/allcanvases");
+    });
+
+    socket.on("User Already Exists", (username) => {
+      setShow(true);
+    });
+  }, [socket]);
 
   return (
     <div className="signup">
@@ -33,7 +54,7 @@ const SignUp = () => {
           <br />
           <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </Form.Group>
-        <Button size="lg" variant="primary" type="submit" disabled={!validateForm()}>
+        <Button size="lg" variant="primary" type="submit">
           Sign Up
         </Button>
       </Form>
@@ -41,6 +62,11 @@ const SignUp = () => {
       <p>
         Already have an account? Login <a href="/">here.</a>
       </p>
+      <ToastContainer position="bottom-center">
+        <Toast bg="danger" onClose={() => setShow(false)} show={show} delay={3000} autohide>
+          <Toast.Body>That username already exists.</Toast.Body>
+        </Toast>
+      </ToastContainer>
     </div>
   );
 };
