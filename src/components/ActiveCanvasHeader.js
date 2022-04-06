@@ -10,7 +10,7 @@ const HeaderBar = (props) => {
                 <div className="alignLeft"> <Home /> </div>
             </div>
             <div className="headerColumn">
-                <h1> Canvas Title </h1>
+                <h1>{props.title}</h1>
             </div>
             <div className="headerColumn">
                 <div className="alignRight">

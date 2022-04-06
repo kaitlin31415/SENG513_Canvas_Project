@@ -20,7 +20,9 @@ const App = () => {
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/bounceback" element={<BounceBackPage />} />
             <Route path="/allcanvases" element={<AllCanvasesPage />} />
-            <Route path="/canvas" element={<ActiveCanvasPage />} />
+            <Route path="/canvas" element={<ActiveCanvasPage />}>
+              <Route path=":id" element={<ActiveCanvasPage />} />
+            </Route>
             <Route
               path="*"
               element={

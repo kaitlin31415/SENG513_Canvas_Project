@@ -1,22 +1,35 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import HeaderBar from "../components/AllCanvasHeader";
 import AllCanvasesGrid from "../components/AllCanvasesGrid";
-import NewCanvasModal from "../components/NewCanvasModal";
+import { SocketContext } from "../context/socket";
+import { UserContext } from "../context/user";
 
 const AllCanvasesPage = () => {
-    const [showNewCanvas, setShowNewCanvas] = useState(false);
+  const socket = useContext(SocketContext);
+  const { user, setUser } = useContext(UserContext);
 
-    return (
-        <div>
-            <div className="headerBar">
-                <HeaderBar />
-            </div>
+  const [showNewCanvas, setShowNewCanvas] = useState(false);
+  const [canvases, setCanvases] = useState([]);
 
-            <br></br>
+  useEffect(() => {
+    socket.emit("canvasesPerUser", { username: user });
 
-            <AllCanvasesGrid />
-        </div>
-    )
+    socket.on("ShowAllCanvases", (canvases) => {
+      setCanvases(canvases);
+    });
+  }, []);
+
+  return (
+    <div>
+      <div className="headerBar">
+        <HeaderBar />
+      </div>
+
+      <br></br>
+
+      <AllCanvasesGrid canvases={canvases} />
+    </div>
+  );
 };
 
 export default AllCanvasesPage;
