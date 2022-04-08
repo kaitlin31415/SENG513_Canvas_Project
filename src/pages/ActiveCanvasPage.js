@@ -64,8 +64,6 @@ const ActiveCanvasPage = () => {
       item.innerHTML = `${colorText(user.color, user.username)}: ${msg}`;
       document.getElementById("chat-messages").appendChild(item);
     });
-
-    socket.emit("openCanvas", { canvasId: canvasId });
   }, [socket]);
 
   return (

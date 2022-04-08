@@ -335,8 +335,7 @@ io.on('connection', (socket) => {
 
     socket.on('drawing', (data) => {
 		updateCanvas(data.canvasId, data.canvasData, URI);
-
-		io.in(data.canvasId).emit('update canvas', data.canvasData);
+		io.to(data.canvasId).emit('update canvas', data.canvasData);
 	});
 
 

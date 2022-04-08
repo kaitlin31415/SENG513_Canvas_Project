@@ -6,6 +6,10 @@ const Board = (props) => {
   const socket = useContext(SocketContext);
 
   useEffect(() => {
+    socket.emit("openCanvas", { canvasId: props.canvasId });
+  }, []);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
 
@@ -29,24 +33,26 @@ const Board = (props) => {
       const canvasData = canvas.toDataURL();
       socket.emit("drawing", {
         canvasId: props.canvasId,
-        canvasData: canvasData
+        canvasData: canvasData,
       });
     };
 
     // Receive canvas from socket
     socket.on("update canvas", (data) => {
-        console.log(data);
       let imageData = new Image();
       imageData.src = data;
-      context.drawImage(imageData, 0, 0);
+      imageData.onload = function () {
+        context.drawImage(imageData, 0, 0);
+      };
     });
 
     socket.on("Render Canvas", (data) => {
-        console.log(data);
-        let imageData = new Image();
-        imageData.src = data;
+      let imageData = new Image();
+      imageData.src = data;
+      imageData.onload = function () {
         context.drawImage(imageData, 0, 0);
-      });
+      };
+    });
 
     // Mouse movements
 
@@ -107,7 +113,7 @@ const Board = (props) => {
 
     window.addEventListener("resize", onResize, false);
     onResize();
-  }, []);
+  }, [socket]);
 
   return (
     <div>
