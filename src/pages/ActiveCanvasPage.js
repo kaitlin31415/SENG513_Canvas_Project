@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import HeaderBar from "../components/ActiveCanvasHeader";
 import BrushColorModal from "../components/BrushColorModal";
 import BrushSizeModal from "../components/BrushSizeModal";
-import ImportCanvasModal from "../components/ImportCanvasModal";
 import ExportCanvasModal from "../components/ExportCanvasModal";
 import ShareCanvasModal from "../components/ShareCanvasModal";
 import ToolBar from "../components/ToolBar";
@@ -93,10 +92,6 @@ const ActiveCanvasPage = () => {
         <ChatWindow handleSendMsg={handleSendMsg} />
       </div>
 
-      <ImportCanvasModal
-        showImportCanvasModal={showImportCanvasModal}
-        setShowImportCanvasModal={setShowImportCanvasModal}
-      />
       <ExportCanvasModal
         showExportCanvasModal={showExportCanvasModal}
         setShowExportCanvasModal={setShowExportCanvasModal}
