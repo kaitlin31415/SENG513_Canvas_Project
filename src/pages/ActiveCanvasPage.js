@@ -8,6 +8,7 @@ import ShareCanvasModal from "../components/ShareCanvasModal";
 import ToolBar from "../components/ToolBar";
 import ChatWindow from "../components/ChatWindow";
 import Brush from "../components/Brush";
+import Canvas from "../components/Canvas";
 import "../styles.scss";
 import { SocketContext } from "../context/socket";
 import { UserContext } from "../context/user";
@@ -65,8 +66,6 @@ const ActiveCanvasPage = () => {
     });
 
     socket.emit("openCanvas", { canvasId: canvasId });
-
-    socket.on("Render Canvas", (canvasInfo) => {});
   }, [socket]);
 
   return (
@@ -90,7 +89,7 @@ const ActiveCanvasPage = () => {
         </div>
 
         <div className="canvas">
-          <h1>[DUMMY CANVAS]</h1>
+          <Canvas color={brushColor} thickness={brushSize} canvasId={canvasId} />
         </div>
 
         <ChatWindow handleSendMsg={handleSendMsg} />
