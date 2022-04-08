@@ -21,7 +21,6 @@ const ActiveCanvasPage = () => {
 
   const { user, setUser } = useContext(UserContext);
 
-  const [showImportCanvasModal, setShowImportCanvasModal] = useState(false);
   const [showExportCanvasModal, setShowExportCanvasModal] = useState(false);
   const [showShareCanvasModal, setShowShareCanvasModal] = useState(false);
   const [showBrushSizeModal, setShowBrushSizeModal] = useState(false);
@@ -70,7 +69,6 @@ const ActiveCanvasPage = () => {
       <div className="headerBar">
         <HeaderBar
           title={canvasId}
-          setShowImportCanvasModal={setShowImportCanvasModal}
           setShowExportCanvasModal={setShowExportCanvasModal}
           setShowShareCanvasModal={setShowShareCanvasModal}
         />

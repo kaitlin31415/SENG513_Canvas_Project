@@ -38,42 +38,6 @@ const Home = () => {
     )
 }
 
-/* class Logout extends React.Component {
-
-    let navigate = useNavigate();
-
-    handleLogout(e) {
-        // e.preventDefault();
-        navigate('/');
-    }
-
-    render() {
-        return (
-            <Button variant="primary" type="submit">
-                <font color="white"> Logout </font>
-            </Button>
-        )
-    }
-} */
-
-/* class Home extends React.Component {
-    render() {
-        return (
-            <Button variant="primary" type="submit">
-                <font color="white"> Home </font>
-            </Button>
-        )
-    }
-} */
-
-const Import = (props) => {
-    return (
-        <Button variant="primary" onClick={() => props.setShowImportCanvasModal(true)}>
-            <font color="white"> Import </font>
-        </Button>
-    )
-}
-
 const Export = (props) => {
     return (
         <Button variant="primary" onClick={() => props.setShowExportCanvasModal(true)}>
@@ -94,7 +58,6 @@ const Share = (props) => {
 export {
     Logout,
     Home,
-    Import,
     Export,
     Share,
 }

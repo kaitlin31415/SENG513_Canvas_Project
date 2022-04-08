@@ -1,6 +1,6 @@
 //import React, { useState } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { Home, Import, Export, Share } from "./HeaderButton";
+import { Home, Export, Share } from "./HeaderButton";
 import "../styles.scss";
 
 const HeaderBar = (props) => {
