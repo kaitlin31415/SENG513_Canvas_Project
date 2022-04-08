@@ -250,8 +250,7 @@ io.on('connection', (socket) => {
 				socket.emit("Successful Authentication", user_info.username);
 				//Add the username and socket id to current user list
 				current_users[user_info.username] = {
-					"socket_id": socket.id,
-					"colour": "000000"
+					"socket_id": socket.id
 				}
 				socketsToUsers[socket.id] = user_info.username;
 
@@ -267,12 +266,6 @@ io.on('connection', (socket) => {
 		}
 		authenticate(user_info, URI, foundUser, noUser)
 
-	});
-
-	socket.on('Update colour', (colour) => {
-		current_users[socketsToUsers[socket_id]]['colour'] = colour;
-		// DEBUG
-		console.log(current_users);
 	});
 
 	socket.on('createCanvas', (info) => {
@@ -295,18 +288,22 @@ io.on('connection', (socket) => {
 	socket.on('openCanvas', (canvas_info) => {
 		//Check if canvas is already open
 		if (canvas_info.canvasId in current_canvases) {
-			socket.emit("Render Canvas", current_canvases[canvas_info.canvasId].canvasData)
-			// Add the user to the canvas List 
-			console.log(current_canvases[canvas_info.canvasId]);
-			socket.join(canvas_info.canvasId)
-			io.to(canvas_info.canvasId).emit('updateActiveUserList', updateActiveUserList(canvas_info.canvasId, socket))
+            let getCanvasObject = (result) => {
+                socket.emit("Render Canvas", result.canvasData);
+                console.log(current_canvases[canvas_info.canvasId]);
+                socket.join(canvas_info.canvasId)
+                io.to(canvas_info.canvasId).emit('updateActiveUserList', updateActiveUserList(canvas_info.canvasId, socket))
+            }
+
+            // Get canvas from database
+			getCanvas(canvas_info, URI, getCanvasObject)
 		} else {
 
 			let createCanvasObject = (result) => {
 				// create canvas object and add it to the current list
 				current_canvases[canvas_info.canvasId] = new Canvas(canvas_info.canvasId, result.canvasData);
                 socket.emit("Render Canvas", current_canvases[canvas_info.canvasId].canvasData)
-				console.log("CURRENT: ", current_canvases[canvas_info.canvasId]);
+				console.log(current_canvases[canvas_info.canvasId]);
 				socket.join(canvas_info.canvasId)
 				io.to(canvas_info.canvasId).emit('updateActiveUserList', updateActiveUserList(canvas_info.canvasId, socket))
 
