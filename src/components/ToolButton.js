@@ -5,7 +5,6 @@ import "../styles.scss";
 import size from "../images/size.svg";
 import eraser from "../images/eraser.svg";
 import pen from "../images/pen.svg";
-import stickyNote from "../images/stickyNote.svg";
 
 const BrushSize = (props) => {
   return (
@@ -35,16 +34,6 @@ class FreeHand extends React.Component {
   }
 }
 
-class AddStickyNote extends React.Component {
-  render() {
-    return (
-      <Button variant="primary" type="submit">
-        <img src={stickyNote} style={{ width: "50px" }} alt="Sticky Note" />
-      </Button>
-    );
-  }
-}
-
 const ChangeBrushColour = (props) => {
   const Brush = props.brush;
   return (
@@ -54,4 +43,4 @@ const ChangeBrushColour = (props) => {
   );
 };
 
-export { BrushSize, Eraser, FreeHand, AddStickyNote, ChangeBrushColour };
+export { BrushSize, Eraser, FreeHand, ChangeBrushColour };

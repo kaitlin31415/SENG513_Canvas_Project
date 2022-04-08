@@ -3,7 +3,6 @@ import {
     BrushSize,
     Eraser,
     FreeHand,
-    AddStickyNote,
     ChangeBrushColour,} from "./ToolButton";
 import "../styles.scss";
 
