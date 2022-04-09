@@ -90,7 +90,9 @@ const ActiveCanvasPage = () => {
         <Canvas color={brushColor} thickness={brushSize} canvasId={canvasId} />
 
         <div className='sidebar'>
-          <button className='sidebar-button' onClick={() => setShowChat(!showChat)} title='Open/Close Chat' />
+          <button className='sidebar-button' onClick={() => setShowChat(!showChat)}>
+            <span>Open/Close Chat</span>
+          </button>
         </div>
 
         <ChatWindow handleSendMsg={handleSendMsg} setShowChat={showChat} />
