@@ -11,7 +11,7 @@ const HeaderBar = (props) => {
         <Home />{" "}
       </Nav>
 
-      <Container>
+      <Container className='active-canvas-header'>
         <Nav className="m-auto">
           <h1> Title of Canvas </h1>
         </Nav>
