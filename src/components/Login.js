@@ -44,12 +44,12 @@ const Login = () => {
         <Image className="logo" src="/logo.png" fluid />
       </div>
       <Form onSubmit={handleLogin}>
-        <Form.Group className="mb-3" controlId="username">
+        <Form.Group className="login-form mb-3" controlId="username">
           <Form.Label>Username</Form.Label>
           <br />
           <Form.Control rows={3} autoFocus type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         </Form.Group>
-        <Form.Group className="mb-4" controlId="password">
+        <Form.Group className="login-form mb-4" controlId="password">
           <Form.Label>Password</Form.Label>
           <br />
           <Form.Control type="password" value={password} onChange={(e) => setPassword(e.target.value)} />

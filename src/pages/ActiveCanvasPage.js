@@ -26,6 +26,8 @@ const ActiveCanvasPage = () => {
   const [showBrushSizeModal, setShowBrushSizeModal] = useState(false);
   const [showBrushColorModal, setShowBrushColorModal] = useState(false);
 
+  const [showChat, setShowChat] = useState(false);
+
   const [brushSize, setBrushSize] = useState(10);
   const [brushColor, setBrushColor] = useState("#ffffff");
 
@@ -64,6 +66,8 @@ const ActiveCanvasPage = () => {
     });
   }, [socket]);
 
+
+
   return (
     <div className="activeCanvas">
       <div className="headerBar">
@@ -83,11 +87,13 @@ const ActiveCanvasPage = () => {
           />
         </div>
 
-        <div className="canvas">
-          <Canvas color={brushColor} thickness={brushSize} canvasId={canvasId} />
+        <Canvas color={brushColor} thickness={brushSize} canvasId={canvasId} />
+
+        <div className='sidebar'>
+          <button className='sidebar-button' onClick={() => setShowChat(!showChat)} title='Open/Close Chat' />
         </div>
 
-        <ChatWindow handleSendMsg={handleSendMsg} />
+        <ChatWindow handleSendMsg={handleSendMsg} setShowChat={showChat} />
       </div>
 
       <ExportCanvasModal

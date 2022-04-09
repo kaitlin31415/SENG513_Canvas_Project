@@ -10,249 +10,709 @@ $color-4: #2c2f33;
 $color-5: #23272a;
 
 
-* {
-    box-sizing: border-box;
+@media (min-width: 320px) {
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        min-width: 320px;
+        margin: 0;
+        font-family: 'Roboto', sans-serif;
+        color: white;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: $color-4;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    /* width */
+    body::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+ 
+    /* Handle */
+    body::-webkit-scrollbar-thumb {
+        background: grey;
+        border-radius: 20px;
+    }
+
+    .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+    }
+
+    h1 {
+        text-align: center;
+        margin: 0;
+        font-weight: bold;
+    }
+    
+    h2 {
+        text-align: center;
+        margin: 0;
+        font-weight: bold;
+    }
+
+    /* Login, Sign Up & Bounceback pages */
+    .login,
+    .signup,
+    .bounceback {
+        padding: 10% 10%;
+        background: $color-5;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .login-form, .signup-form {
+        display: inline-block;
+        width: 100%;
+    }
+    
+    .login .btn-primary,
+    .signup .btn-primary {
+        color: white;
+        width: 100%
+    }
+
+    .bounceback .btn-primary {
+        color: white;
+    }
+
+    /* All Canvases Page */
+    .all-canvases-col {
+        width: 50%;
+    }
+
+    .canvasbox {
+        align-content: center;
+        text-align: center;
+        color: black;
+    }
+
+    .canvasbox-body {
+        height: 0;
+        padding-bottom: 50%;
+    }
+
+    .canvasbox-title {
+        font-size: 6vw;
+    }
+
+    /* Active Canvas Page */
+    .active-canvas-header {
+        width: 50%;
+    }
+
+    .mainBody {
+        display: flex;
+        width: 100%;
+        height: calc(100vh - 8vh);
+    }
+
+    .toolbar {
+        background: $color-4;
+        padding-top: 20px;
+        width: 18%;
+        height: 100%;
+    }
+
+    .toolbar-button {
+        position: relative;
+        height: 0;
+        padding-bottom: 65%;
+        width: 80%;
+    }
+
+    .toolbar-img {
+        display: block;
+        width: 100%;
+        margin: auto;
+    }
+
+    /* Active Canvas modals */
+    .modal-content {
+        text-align: center;
+    }
+    
+    .modal-dialog .btn-primary {
+        color: white;
+    }
+    
+    .brushsize-modal-col {
+        width: 33.33%;
+    }
+
+    .brushsize-modal-button {
+        width: 100%;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    /* Brush Color Modal */
+    .colorpicker {
+        width: 100% !important;
+    }
+
+    /* Active Canvas */
+    .canvas-display {
+        // display: flex;
+        background-color: white;
+        flex: 2;
+        max-width: 1280px;
+        max-height: 720px;
+        overflow: auto;
+    }
+
+    .canvas-display::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .canvas-display::-webkit-scrollbar-thumb {
+        background: rgba(128, 128, 128, 0.6);
+        border-radius: 5px;
+    }
+
+    .canvas-content {
+        width: 1280px;
+        height: 720px;
+    }
+
+    .sidebar {
+        width: 16px;
+        height: 100%;
+        margin-left: auto;
+    }
+
+    .sidebar-button {
+        background-color: $color-1;
+        width: 100%;
+        height: 100%;
+        border: 1px solid $color-1;
+    }
+
+    .sidebar-button:hover {
+        background: #90a8ff;
+        transition-duration: 300ms;
+    }
+    
+    /* Chat window */
+    .chatWindow {
+        display: none;
+        width: 0px;
+    }
+
+    /* Chat window */
+    .chatWindow-active {
+        display: flex;
+        flex-direction: column;
+        min-width: 250px !important;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .chat-top {
+        font-size: 14px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        height: 30px;
+    }
+
+    .chat-mid {
+        display: flex;
+        height: calc(92vh - 34px - 30px);
+    }
+
+    .chat-div-messages {
+        display: flex;
+        flex-direction: column-reverse;
+        float: left;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        width: 100%;
+        background-color: $color-5;
+        box-sizing: border-box;
+        position: relative;
+    }
+
+    #chat-messages {
+        list-style-type: none;
+        list-style-position: inside;
+        margin: 0;
+        padding: 0;
+    }
+
+    #chat-messages > li {
+        padding-left: .7em;
+        padding-bottom: 0.5em;
+        display: block;
+        word-break: break-word;
+        white-space: normal;
+    }
+
+    .chat-bot {
+        height: 34px;
+    }
+
+    .chat-bot-div {
+        font-size: 14px;
+        height: 100%;
+    }
+
+    .chat-bot-form {
+        height: 100%;
+    }
+
+    #chat-input {
+        background-color: #404449;
+        color: $color-2;
+        border: none;
+        height: 100%;
+        width: 70%;
+    }
+
+    #chat-input:focus {
+        outline: none;
+    }
+
+    #chat-input,
+    chat-input::-webkit-input-placeholder {
+        padding-left: 7px;
+    }
+
+    .chat-bot-form>button {
+        background: $color-1;
+        color: $color-2;
+        border: none;
+        height: 100%;
+        width: 30%;
+    }
+
+    .chat-bot-form > button:hover {
+        background: #90a8ff;
+        transition-duration: 300ms;
+    }
 }
 
-body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    color: white;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: $color-4;
-}
 
-.content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-}
 
-h1 {
-    text-align: center;
-    margin: 0;
-    font-weight: bold;
-}
+@media (min-width: 480px) {
 
-h2 {
-    text-align: center;
-    margin: 0;
-    font-weight: bold;
-}
-
-/* Login Page */
-.login {
-    padding: 50px 40px;
-    background: $color-5;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.login .btn-primary {
-    color: white;
-    width: 100%
-}
-
-/* Sign Up Page */
-.signup {
-    padding: 50px 40px;
-    background: $color-5;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.signup .btn-primary {
-    color: white;
-    width: 100%
-}
-
-/* Bounceback Page */
-.bounceback {
-    padding: 50px 40px;
-    background: $color-5;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
-}
-
-.bounceback .btn-primary {
-    color: white;
-}
-
-/* All Canvases Page */
-.canvasbox {
-    align-content: center;
-    text-align: center;
-    color: black;
+    /* Active Canvas Page */
+    .toolbar {
+        width: 13%;
+    }
 }
 
 
-// .activeCanvas {
-//     display: flex;
-//     flex-direction: column;
+
+@media (min-width: 576px) {
+
+    /* All Canvases Page */
+    .all-canvases-col {
+        width: 33.33%;
+    }
+
+    .canvasbox-title {
+        font-size: 18px;
+    }
+
+    /* Active Canvas Page */
+    .toolbar {
+        width: 11%;
+    }
+}
+
+
+
+@media (min-width: 768px) {
+
+    /* All Canvases Page */
+    .all-canvases-col {
+        width: 25%;
+    }
+
+    /* Active Canvas Page */
+    .toolbar {
+        width: 8%;
+    }
+}
+
+
+
+@media (min-width: 992px) {
+
+    /* All Canvases Page */
+    .all-canvases-col {
+        width: 20%;
+    }
+
+    /* Active Canvas Page */
+    .toolbar {
+        width: 6%;
+    }
+
+    /* Chat window */
+    // .chatWindow {
+    //     display: flex;
+    //     flex-direction: column;
+    //     width: 15%;
+    //     padding-left: 10px;
+    //     padding-right: 10px;
+    // }
+
+    // .chat-top {
+    //     font-size: 14px;
+    //     padding-top: 5px;
+    //     padding-bottom: 5px;
+    //     height: 30px;
+    // }
+
+    // .chat-mid {
+    //     display: flex;
+    //     height: calc(92vh - 34px - 30px);
+    // }
+
+    // .chat-div-messages {
+    //     display: flex;
+    //     flex-direction: column-reverse;
+    //     float: left;
+    //     overflow-y: scroll;
+    //     overflow-x: hidden;
+    //     width: 100%;
+    //     background-color: $color-5;
+    //     box-sizing: border-box;
+    //     position: relative;
+    // }
+
+    // #chat-messages {
+    //     list-style-type: none;
+    //     list-style-position: inside;
+    //     margin: 0;
+    //     padding: 0;
+    // }
+
+    // #chat-messages > li {
+    //     padding-left: .7em;
+    //     padding-bottom: 0.5em;
+    //     display: block;
+    //     word-break: break-word;
+    //     white-space: normal;
+    // }
+
+    // .chat-bot {
+    //     height: 34px;
+    // }
+
+    // .chat-bot-div {
+    //     font-size: 14px;
+    //     height: 100%;
+    // }
+
+    // .chat-bot-form {
+    //     height: 100%;
+    // }
+
+    // #chat-input {
+    //     background-color: #404449;
+    //     color: $color-2;
+    //     border: none;
+    //     height: 100%;
+    //     width: 70%;
+    // }
+
+    // #chat-input:focus {
+    //     outline: none;
+    // }
+
+    // #chat-input,
+    // chat-input::-webkit-input-placeholder {
+    //     padding-left: 7px;
+    // }
+
+    // .chat-bot-form>button {
+    //     background: $color-1;
+    //     color: $color-2;
+    //     border: none;
+    //     height: 100%;
+    //     width: 30%;
+    // }
+
+    // .chat-bot-form > button:hover {
+    //     background: #85a0ff;
+    //     transition-duration: 300ms;
+    // }
+}
+
+
+
+@media (min-width: 1280px) {
+
+
+
+    /* Active Canvas Page */
+    .toolbar {
+        width: 5%;
+    }
+
+    /* Chat window */
+    #chat-input {
+        width: 80%;
+    }
+
+    .chat-bot-form>button {
+        width: 20%;
+    }
+}
+
+
+// * {
+//     box-sizing: border-box;
+// }
+
+// body {
+//     margin: 0;
+//     font-family: 'Roboto', sans-serif;
+//     color: white;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+//     background-color: $color-4;
+// }
+
+// .content {
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     margin-right: -50%;
+//     transform: translate(-50%, -50%);
+// }
+
+// h1 {
+//     text-align: center;
+//     margin: 0;
+//     font-weight: bold;
+// }
+
+// h2 {
+//     text-align: center;
+//     margin: 0;
+//     font-weight: bold;
+// }
+
+// /* Login Page */
+// .login {
+//     padding: 50px 40px;
+//     background: $color-5;
+//     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+// }
+
+// .login .btn-primary {
+//     color: white;
+//     width: 100%
+// }
+
+// /* Sign Up Page */
+// .signup {
+//     padding: 50px 40px;
+//     background: $color-5;
+//     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+// }
+
+// .signup .btn-primary {
+//     color: white;
+//     width: 100%
+// }
+
+// /* Bounceback Page */
+// .bounceback {
+//     padding: 50px 40px;
+//     background: $color-5;
+//     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+// }
+
+// .bounceback .btn-primary {
+//     color: white;
+// }
+
+// /* All Canvases Page */
+// .canvasbox {
+//     align-content: center;
+//     text-align: center;
+//     color: black;
 // }
 
 
-.mainBody {
-    //background-color: red;
-    display: flex;
-    height: 93vh;
-    width: 100%;
-    position: fixed;
-}
-
-/* Active Canvas Page */
-.toolbar {
-    padding-top: 20px;
-    width: 6%;
-    margin-left: 10px;
-    margin-right: 10px;
-    //height: 90%;
-    background: $color-4;
-}
-
-.jsonfile {
-    padding: 1vw 1vh;
-    width: 50%;
-    height: 50%;
-    background-color: $color-1;
-    color: white;
-}
-
-.file {
-    padding: 1vw 1vh;
-    width: 100%;
-    height: 90%;
-    background-color: $color-1;
-    color: white;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-/* Brush Color Modal */
-.colorpicker {
-    width: 100% !important;
-}
-
-/* Modal */
-.modal-content {
-    text-align: center;
-}
-
-.modal-dialog .btn-primary {
-    color: white;
-}
+// // .activeCanvas {
+// //     display: flex;
+// //     flex-direction: column;
+// // }
 
 
-/* Active Canvas placeholder */
-.canvas {
-    background-color: white;
-    display: flex;
-    width: 70%;
-    flex: 2;
-    text-align: center;
-    margin-bottom: 10px;
-}
+// .mainBody {
+//     //background-color: red;
+//     display: flex;
+//     height: 93vh;
+//     width: 100%;
+//     position: fixed;
+// }
+
+// /* Active Canvas Page */
+// .toolbar {
+//     padding-top: 20px;
+//     width: 6%;
+//     margin-left: 10px;
+//     margin-right: 10px;
+//     //height: 90%;
+//     background: $color-4;
+// }
+
+// .jsonfile {
+//     padding: 1vw 1vh;
+//     width: 50%;
+//     height: 50%;
+//     background-color: $color-1;
+//     color: white;
+// }
+
+// .file {
+//     padding: 1vw 1vh;
+//     width: 100%;
+//     height: 90%;
+//     background-color: $color-1;
+//     color: white;
+// }
+
+// * {
+//     box-sizing: border-box;
+// }
+
+// /* Brush Color Modal */
+// .colorpicker {
+//     width: 100% !important;
+// }
+
+// /* Modal */
+// .modal-content {
+//     text-align: center;
+// }
+
+// .modal-dialog .btn-primary {
+//     color: white;
+// }
 
 
-/* Chat window */
-.chatWindow {
-    display: flex;
-    flex-direction: column;
-    width: 15%;
-    //height: 93vh;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
-.chat-top {
-    // background-color: red;
-    font-size: 14px;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    height: 3.4%;
-}
-
-.chat-mid {
-    // background-color: blue;
-    display: flex;
-    height: 92.6%;
-}
-
-.chat-div-messages {
-    display: flex;
-    flex-direction: column-reverse;
-    float: left;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    width: 100%;
-    // margin-left: 10px;
-    // margin-right: 10px;
-    background-color: $color-5;
-    box-sizing: border-box;
-    position: relative;
-}
-
-#chat-messages {
-    list-style-type: none;
-    list-style-position: inside;
-    margin: 0;
-    padding: 0;
-}
-
-#chat-messages>li {
-    padding-left: .7em;
-    padding-bottom: 0.5em;
-    display: block;
-    word-break: break-word;
-    white-space: normal;
-}
+// /* Active Canvas placeholder */
+// .canvas {
+//     background-color: white;
+//     display: flex;
+//     width: 70%;
+//     flex: 2;
+//     text-align: center;
+//     margin-bottom: 10px;
+// }
 
 
-.chat-bot {
-    // background-color: green;
-    height: 4%;
-}
+// /* Chat window */
+// .chatWindow {
+//     display: flex;
+//     flex-direction: column;
+//     width: 15%;
+//     //height: 93vh;
+//     margin-left: 10px;
+//     margin-right: 10px;
+//     margin-bottom: 10px;
+// }
 
-.chat-bot-div {
-    font-size: 14px;
-    height: 100%;
-}
+// .chat-top {
+//     // background-color: red;
+//     font-size: 14px;
+//     padding-top: 5px;
+//     padding-bottom: 5px;
+//     height: 3.4%;
+// }
 
-.chat-bot-form {
-    height: 100%;
-}
+// .chat-mid {
+//     // background-color: blue;
+//     display: flex;
+//     height: 92.6%;
+// }
 
-#chat-input {
-    background-color: #404449;
-    color: $color-2;
-    border: none;
-    height: 100%;
-    width: 80%;
-}
+// .chat-div-messages {
+//     display: flex;
+//     flex-direction: column-reverse;
+//     float: left;
+//     overflow-y: scroll;
+//     overflow-x: hidden;
+//     width: 100%;
+//     // margin-left: 10px;
+//     // margin-right: 10px;
+//     background-color: $color-5;
+//     box-sizing: border-box;
+//     position: relative;
+// }
 
-#chat-input:focus {
-    outline: none;
-}
+// #chat-messages {
+//     list-style-type: none;
+//     list-style-position: inside;
+//     margin: 0;
+//     padding: 0;
+// }
 
-#chat-input,
-chat-input::-webkit-input-placeholder {
-    padding-left: 7px;
-}
+// #chat-messages>li {
+//     padding-left: .7em;
+//     padding-bottom: 0.5em;
+//     display: block;
+//     word-break: break-word;
+//     white-space: normal;
+// }
 
-.chat-bot-form>button {
-    background: $color-1;
-    color: $color-2;
-    border: none;
-    height: 100%;
-    width: 20%;
-}
 
-.chat-bot-form>button:hover {
-    background: #85a0ff;
-    transition-duration: 300ms;
-}
+// .chat-bot {
+//     // background-color: green;
+//     height: 4%;
+// }
 
-// #7289da
+// .chat-bot-div {
+//     font-size: 14px;
+//     height: 100%;
+// }
+
+// .chat-bot-form {
+//     height: 100%;
+// }
+
+// #chat-input {
+//     background-color: #404449;
+//     color: $color-2;
+//     border: none;
+//     height: 100%;
+//     width: 80%;
+// }
+
+// #chat-input:focus {
+//     outline: none;
+// }
+
+// #chat-input,
+// chat-input::-webkit-input-placeholder {
+//     padding-left: 7px;
+// }
+
+// .chat-bot-form>button {
+//     background: $color-1;
+//     color: $color-2;
+//     border: none;
+//     height: 100%;
+//     width: 20%;
+// }
+
+// .chat-bot-form>button:hover {
+//     background: #85a0ff;
+//     transition-duration: 300ms;
+// }

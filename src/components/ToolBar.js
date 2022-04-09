@@ -12,16 +12,16 @@ const ToolBar = (props) => {
         <div className="ToolButton">
             <div className="text-center">
                 <BrushSize setShowBrushSizeModal={props.setShowBrushSizeModal} />
-                <p>Brush Size</p>
+                <p style={{marginLeft: '2px', marginRight: '2px'}}>Brush Size</p>
 
                 <Eraser />
-                <p>Eraser</p>
+                <p style={{marginLeft: '2px', marginRight: '2px'}}>Eraser</p>
   
                 <FreeHand />
-                <p>Free Hand</p>
+                <p style={{marginLeft: '2px', marginRight: '2px'}}>Free Hand</p>
 
                 <ChangeBrushColour brush={props.brush} setShowBrushColorModal={props.setShowBrushColorModal} />
-                <p>Change Brush Colour</p>
+                <p style={{marginLeft: '2px', marginRight: '2px'}}>Brush Color</p>
             </div>
         </div>
 
