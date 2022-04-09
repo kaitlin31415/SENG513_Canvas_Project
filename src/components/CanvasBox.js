@@ -17,9 +17,9 @@ const CanvasBox = (props) => {
     <div className="canvasbox">
       {newCanvas ? (
         <>
-          <Card className="canvasbox mb-2">
-            <Card.Body>
-              <Card.Title>New Canvas</Card.Title>
+          <Card className="mb-2">
+            <Card.Body className='canvasbox-body'>
+              <Card.Title className='canvasbox-title'>New Canvas</Card.Title>
             </Card.Body>
           </Card>
           <NewCanvasModal />

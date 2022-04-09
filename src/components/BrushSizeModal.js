@@ -21,21 +21,21 @@ const BrushSizeModal = (props) => {
         <Modal.Body>
           <Container>
             <Row>
-              <Col>
+              <Col className='brushsize-modal-col'>
                 <Image src={smallBrush} fluid />
-                <Button onClick={() => props.selectBrushSize(10)}>
+                <Button className='brushsize-modal-button' onClick={() => props.selectBrushSize(10)}>
                   Small
                 </Button>
               </Col>
-              <Col>
+              <Col className='brushsize-modal-col'>
                 <Image src={mediumBrush} fluid />
-                <Button onClick={() => props.selectBrushSize(20)}>
+                <Button className='brushsize-modal-button' onClick={() => props.selectBrushSize(20)}>
                   Medium
                 </Button>
               </Col>
-              <Col>
+              <Col className='brushsize-modal-col'>
                 <Image src={largeBrush} fluid />
-                <Button onClick={() => props.selectBrushSize(30)}>  
+                <Button className='brushsize-modal-button' onClick={() => props.selectBrushSize(30)}>  
                   Large
                 </Button>
               </Col>

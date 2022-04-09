@@ -8,8 +8,8 @@ import pen from "../images/pen.svg";
 
 const BrushSize = (props) => {
   return (
-    <Button variant="primary" onClick={() => props.setShowBrushSizeModal(true)}>
-      <img src={size} style={{ width: "50px" }} alt="Brush Size" />
+    <Button className='toolbar-button' variant="primary" onClick={() => props.setShowBrushSizeModal(true)}>
+      <img className='toolbar-img' src={size} alt="Brush Size" />
     </Button>
   );
 };
@@ -17,8 +17,8 @@ const BrushSize = (props) => {
 class Eraser extends React.Component {
   render() {
     return (
-      <Button variant="primary" type="submit">
-        <img src={eraser} style={{ width: "50px" }} alt="Eraser" />
+      <Button className='toolbar-button' variant="primary" type="submit">
+        <img className='toolbar-img' src={eraser} alt="Eraser" />
       </Button>
     );
   }
@@ -27,8 +27,8 @@ class Eraser extends React.Component {
 class FreeHand extends React.Component {
   render() {
     return (
-      <Button variant="primary" type="submit">
-        <img src={pen} style={{ width: "50px" }} alt="Pen" />
+      <Button className='toolbar-button' variant="primary" type="submit">
+        <img className='toolbar-img' src={pen} alt="Pen" />
       </Button>
     );
   }

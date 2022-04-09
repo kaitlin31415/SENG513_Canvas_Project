@@ -1,6 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState } from "react";
 
 const ChatWindow = (props) => {
+    // const [show, setShow] = useState(false)
     const [inputVal, setInputVal] = useState('')
     
     // true if input is not whitespace
@@ -21,8 +22,12 @@ const ChatWindow = (props) => {
         }
     }
     
+    // <div className='chat-sidebar'>
+    //     <button style={{background: 'red', height: '500px'}} onClick={() => setShow(!show)}></button>
+    // </div>  
+
     return (
-        <div className='chatWindow'>
+        <div className={props.setShowChat ? 'chatWindow-active' : 'chatWindow'}>
             <div className='chat-top'>
                 <header className='text-center'>
                     CHAT

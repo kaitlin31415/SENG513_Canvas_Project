@@ -116,8 +116,8 @@ const Board = (props) => {
   }, [socket]);
 
   return (
-    <div>
-      <canvas ref={canvasRef} />
+    <div className="canvas-display">
+      <canvas className='canvas-content' ref={canvasRef} />
     </div>
   );
 };
