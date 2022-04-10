@@ -14,10 +14,10 @@ const ToolBar = (props) => {
                 <BrushSize setShowBrushSizeModal={props.setShowBrushSizeModal} />
                 <p style={{marginLeft: '2px', marginRight: '2px'}}>Brush Size</p>
 
-                <Eraser />
+                <Eraser selectColor={props.selectColor} />
                 <p style={{marginLeft: '2px', marginRight: '2px'}}>Eraser</p>
   
-                <FreeHand />
+                <FreeHand selectColor={props.selectColor} />
                 <p style={{marginLeft: '2px', marginRight: '2px'}}>Free Hand</p>
 
                 <ChangeBrushColour brush={props.brush} setShowBrushColorModal={props.setShowBrushColorModal} />

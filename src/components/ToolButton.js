@@ -14,24 +14,20 @@ const BrushSize = (props) => {
   );
 };
 
-class Eraser extends React.Component {
-  render() {
-    return (
-      <Button className='toolbar-button' variant="primary" type="submit">
-        <img className='toolbar-img' src={eraser} alt="Eraser" />
-      </Button>
-    );
-  }
+const Eraser = (props) => {
+  return (
+    <Button className='toolbar-button' variant="primary" onClick={() => props.selectColor("#ffffff")}>
+      <img className='toolbar-img' src={eraser} alt="Eraser" />
+    </Button>
+  )
 }
 
-class FreeHand extends React.Component {
-  render() {
-    return (
-      <Button className='toolbar-button' variant="primary" type="submit">
-        <img className='toolbar-img' src={pen} alt="Pen" />
-      </Button>
-    );
-  }
+const FreeHand = (props) => {
+  return (
+    <Button className='toolbar-button' variant="primary" onClick={() => props.selectColor("#000000")}>
+      <img className='toolbar-img' src={pen} alt="Pen" />
+    </Button>
+  )
 }
 
 const ChangeBrushColour = (props) => {

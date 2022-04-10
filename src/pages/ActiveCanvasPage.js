@@ -29,7 +29,7 @@ const ActiveCanvasPage = () => {
   const [showChat, setShowChat] = useState(false);
 
   const [brushSize, setBrushSize] = useState(10);
-  const [brushColor, setBrushColor] = useState("#ffffff");
+  const [brushColor, setBrushColor] = useState("#000000");
 
   const selectBrushSize = (size) => {
     setBrushSize(size);
@@ -82,6 +82,7 @@ const ActiveCanvasPage = () => {
         <div className="toolbar">
           <ToolBar
             brush={brush}
+            selectColor={selectColor}
             setShowBrushSizeModal={setShowBrushSizeModal}
             setShowBrushColorModal={setShowBrushColorModal}
           />
