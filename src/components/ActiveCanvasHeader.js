@@ -1,19 +1,43 @@
 //import React, { useState } from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Home, Export, Share } from "./HeaderButton";
+import UserIcon from "./UserIcon";
 import "../styles.scss";
 
 const HeaderBar = (props) => {
+
+  const canvasName = props.title;
+
+  //Return a list of icon objects
+  const renderUser = () => {
+    console.log(props.userList.length);
+    if (!props.userList) return []
+    const userIcons = props.userList.map((element, i) => {
+      return(
+      <UserIcon
+          key={i} 
+          user={element}
+          color={props.color}
+        />
+      );
+    });
+    // console.log(userIcons)
+    return userIcons
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Nav style={{ marginLeft: "1.6vw" }}>
-        {" "}
-        <Home />{" "}
+        <Home />
       </Nav>
+
+      <Nav>
+        {renderUser()}   
+      </Nav> 
 
       <Container className='active-canvas-header'>
         <Nav className="m-auto">
-          <h1> Title of Canvas </h1>
+          <h1> {canvasName} </h1>
         </Nav>
       </Container>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" style={{ marginRight: "1.6vw" }} />

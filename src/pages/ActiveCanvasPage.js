@@ -29,7 +29,11 @@ const ActiveCanvasPage = () => {
   const [showChat, setShowChat] = useState(false);
 
   const [brushSize, setBrushSize] = useState(10);
-  const [brushColor, setBrushColor] = useState("#000000");
+  const [brushColor, setBrushColor] = useState("#ffffff");
+
+  //Used for Active Canvas Header User Icons
+  const [users, setUsers] = useState([]);
+
 
   const selectBrushSize = (size) => {
     setBrushSize(size);
@@ -64,6 +68,13 @@ const ActiveCanvasPage = () => {
       item.innerHTML = `${colorText(user.color, user.username)}: ${msg}`;
       document.getElementById("chat-messages").appendChild(item);
     });
+
+    //For Active Canvas header bar user icons
+    socket.on("updateActiveUserList", (u) => {
+      //console.log(u);
+      setUsers(u);
+    });
+
   }, [socket]);
 
 
@@ -73,6 +84,8 @@ const ActiveCanvasPage = () => {
       <div className="headerBar">
         <HeaderBar
           title={canvasId}
+          userList={users}
+          color={brushColor}
           setShowExportCanvasModal={setShowExportCanvasModal}
           setShowShareCanvasModal={setShowShareCanvasModal}
         />
@@ -82,7 +95,6 @@ const ActiveCanvasPage = () => {
         <div className="toolbar">
           <ToolBar
             brush={brush}
-            selectColor={selectColor}
             setShowBrushSizeModal={setShowBrushSizeModal}
             setShowBrushColorModal={setShowBrushColorModal}
           />
@@ -103,7 +115,11 @@ const ActiveCanvasPage = () => {
         showExportCanvasModal={showExportCanvasModal}
         setShowExportCanvasModal={setShowExportCanvasModal}
       />
-      <ShareCanvasModal showShareCanvasModal={showShareCanvasModal} setShowShareCanvasModal={setShowShareCanvasModal} />
+      <ShareCanvasModal 
+        title={canvasId}
+        showShareCanvasModal={showShareCanvasModal}
+        setShowShareCanvasModal={setShowShareCanvasModal} 
+      />
       <BrushSizeModal
         showBrushSizeModal={showBrushSizeModal}
         setShowBrushSizeModal={setShowBrushSizeModal}
