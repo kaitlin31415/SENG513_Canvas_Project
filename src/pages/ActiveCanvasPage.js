@@ -2,14 +2,15 @@ import React, { useState, useContext, useEffect } from "react";
 import HeaderBar from "../components/ActiveCanvasHeader";
 import BrushColorModal from "../components/BrushColorModal";
 import BrushSizeModal from "../components/BrushSizeModal";
-import ImportCanvasModal from "../components/ImportCanvasModal";
 import ExportCanvasModal from "../components/ExportCanvasModal";
 import ShareCanvasModal from "../components/ShareCanvasModal";
 import ToolBar from "../components/ToolBar";
 import ChatWindow from "../components/ChatWindow";
 import Brush from "../components/Brush";
+import Canvas from "../components/Canvas";
 import "../styles.scss";
 import { SocketContext } from "../context/socket";
+import { UserContext } from "../context/user";
 import { useParams } from "react-router-dom";
 
 const ActiveCanvasPage = () => {
@@ -18,14 +19,17 @@ const ActiveCanvasPage = () => {
   const canvasId = params.id;
   const socket = useContext(SocketContext);
 
-  const [showImportCanvasModal, setShowImportCanvasModal] = useState(false);
+  const { user, setUser } = useContext(UserContext);
+
   const [showExportCanvasModal, setShowExportCanvasModal] = useState(false);
   const [showShareCanvasModal, setShowShareCanvasModal] = useState(false);
   const [showBrushSizeModal, setShowBrushSizeModal] = useState(false);
   const [showBrushColorModal, setShowBrushColorModal] = useState(false);
 
+  const [showChat, setShowChat] = useState(false);
+
   const [brushSize, setBrushSize] = useState(10);
-  const [brushColor, setBrushColor] = useState("#ffffff");
+  const [brushColor, setBrushColor] = useState("#000000");
 
   const selectBrushSize = (size) => {
     setBrushSize(size);
@@ -44,8 +48,8 @@ const ActiveCanvasPage = () => {
   /* -------- Chat window functions -------- */
 
   const handleSendMsg = (msg) => {
-    let user = { username: "User1", color: brushColor };
-    socket.emit("chat message", user, msg);
+    let info = { canvasId: canvasId, username: user, color: brushColor };
+    socket.emit("chat message", info, msg);
     document.getElementById("chat-input").value = "";
   };
 
@@ -60,18 +64,15 @@ const ActiveCanvasPage = () => {
       item.innerHTML = `${colorText(user.color, user.username)}: ${msg}`;
       document.getElementById("chat-messages").appendChild(item);
     });
-
-    socket.emit("openCanvas", { canvasId: canvasId });
-
-    socket.on("Render Canvas", (canvasInfo) => {});
   }, [socket]);
+
+
 
   return (
     <div className="activeCanvas">
       <div className="headerBar">
         <HeaderBar
           title={canvasId}
-          setShowImportCanvasModal={setShowImportCanvasModal}
           setShowExportCanvasModal={setShowExportCanvasModal}
           setShowShareCanvasModal={setShowShareCanvasModal}
         />
@@ -81,22 +82,23 @@ const ActiveCanvasPage = () => {
         <div className="toolbar">
           <ToolBar
             brush={brush}
+            selectColor={selectColor}
             setShowBrushSizeModal={setShowBrushSizeModal}
             setShowBrushColorModal={setShowBrushColorModal}
           />
         </div>
 
-        <div className="canvas">
-          <h1>[DUMMY CANVAS]</h1>
+        <Canvas color={brushColor} thickness={brushSize} canvasId={canvasId} />
+
+        <div className='sidebar'>
+          <button className='sidebar-button' onClick={() => setShowChat(!showChat)}>
+            <span>Open/Close Chat</span>
+          </button>
         </div>
 
-        <ChatWindow handleSendMsg={handleSendMsg} />
+        <ChatWindow handleSendMsg={handleSendMsg} setShowChat={showChat} />
       </div>
 
-      <ImportCanvasModal
-        showImportCanvasModal={showImportCanvasModal}
-        setShowImportCanvasModal={setShowImportCanvasModal}
-      />
       <ExportCanvasModal
         showExportCanvasModal={showExportCanvasModal}
         setShowExportCanvasModal={setShowExportCanvasModal}

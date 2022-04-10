@@ -5,44 +5,29 @@ import "../styles.scss";
 import size from "../images/size.svg";
 import eraser from "../images/eraser.svg";
 import pen from "../images/pen.svg";
-import stickyNote from "../images/stickyNote.svg";
 
 const BrushSize = (props) => {
   return (
-    <Button variant="primary" onClick={() => props.setShowBrushSizeModal(true)}>
-      <img src={size} style={{ width: "50px" }} alt="Brush Size" />
+    <Button className='toolbar-button' variant="primary" onClick={() => props.setShowBrushSizeModal(true)}>
+      <img className='toolbar-img' src={size} alt="Brush Size" />
     </Button>
   );
 };
 
-class Eraser extends React.Component {
-  render() {
-    return (
-      <Button variant="primary" type="submit">
-        <img src={eraser} style={{ width: "50px" }} alt="Eraser" />
-      </Button>
-    );
-  }
+const Eraser = (props) => {
+  return (
+    <Button className='toolbar-button' variant="primary" onClick={() => props.selectColor("#ffffff")}>
+      <img className='toolbar-img' src={eraser} alt="Eraser" />
+    </Button>
+  )
 }
 
-class FreeHand extends React.Component {
-  render() {
-    return (
-      <Button variant="primary" type="submit">
-        <img src={pen} style={{ width: "50px" }} alt="Pen" />
-      </Button>
-    );
-  }
-}
-
-class AddStickyNote extends React.Component {
-  render() {
-    return (
-      <Button variant="primary" type="submit">
-        <img src={stickyNote} style={{ width: "50px" }} alt="Sticky Note" />
-      </Button>
-    );
-  }
+const FreeHand = (props) => {
+  return (
+    <Button className='toolbar-button' variant="primary" onClick={() => props.selectColor("#000000")}>
+      <img className='toolbar-img' src={pen} alt="Pen" />
+    </Button>
+  )
 }
 
 const ChangeBrushColour = (props) => {
@@ -54,4 +39,4 @@ const ChangeBrushColour = (props) => {
   );
 };
 
-export { BrushSize, Eraser, FreeHand, AddStickyNote, ChangeBrushColour };
+export { BrushSize, Eraser, FreeHand, ChangeBrushColour };

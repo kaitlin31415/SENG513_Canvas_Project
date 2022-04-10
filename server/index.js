@@ -5,61 +5,34 @@ const bcrypt = require('bcryptjs');
 //https://stackoverflow.com/questions/36513175/accessing-mongodb-outside-of-connection-callback
 
 class Canvas {
-	constructor(id, canvasInfo) {
+	constructor(id, canvasData) {
 		this.id = id;
-		this.stickynotes = canvasInfo.stickynotes;
-		this.drawings = canvasInfo.drawings;
-		this.users = canvasInfo.users;
+        this.canvasData = canvasData;
 	}
-	*addDrawing(drawingJson) {
-		this.drawings.push(drawingJson);
-	}
-	*addSticky(stickyJson) {
-		this.stickynotes.push(stickyJson);
-	}
-	*addUser(user) {
-		if (!(user in this.users)) {
-			this.users.push(user);
-		}
-	}
-	*objForDatabase() {
-		return {
-			drawings: this.drawings,
-			stickies: this.stickynotes,
-			users: this.users
-		}
-	}
+	// *addDrawing(drawingJson) {
+	// 	this.drawings.push(drawingJson);
+	// }
+	// *addSticky(stickyJson) {
+	// 	this.stickynotes.push(stickyJson);
+	// }
+	// *addUser(user) {
+	// 	if (!(user in this.users)) {
+	// 		this.users.push(user);
+	// 	}
+	// }
+	// *objForDatabase() {
+	// 	return {
+	// 		drawings: this.drawings,
+	// 		stickies: this.stickynotes,
+	// 		users: this.users
+	// 	}
+	// }
 	*objForClient() {
 		return {
-			drawings: this.drawings,
-			stickies: this.stickynotes,
+			canvasData: this.canvasData
 		}
 	}
 }
-
-// class Drawing {
-// 	constructor(x0, y0, x1, y1, colour, thickness, canvas) {
-// 		this.x0 = x0;
-// 		this.y0 = y0;
-// 		this.x1 = x1;
-// 		this.y1 = y1;
-// 		this.colour = colour;
-// 		this.thickness = thickness;
-// 		this.canvasId = canvas;
-// 	}
-// 	*drawing() {
-// 		return {
-// 			'x0': this.x0,
-// 			'y0': this.y0,
-// 			'x1': this.x1,
-// 			'y1': this.y1,
-// 			'colour': this.colour,
-// 			'thickness': this.thickness,
-// 			'canvasId': this.canvasId
-// 		}
-// 	}
-// }
-
 
 //User Registration
 async function createNewUser({ username, password }, url, success_callback, user_already_exists_callback) {
@@ -118,7 +91,7 @@ async function createNewCanvas({ canvasId }, url, success_callback, canvas_alrea
 
 		if (err) throw err;
 		var dbo = db.db("CanvasInfo");
-		var myobj = { canvasId: canvasId, canvasInfo: { stickynotes: [], drawings: [], users: [] } };
+		var myobj = { canvasId: canvasId, canvasData: "" };
 		dbo.collection("canvasInfoCollection").find({ canvasId: canvasId }, {}).toArray(function (err, result) {
 			if (err) throw err;
 			db.close();
@@ -147,8 +120,7 @@ async function getCanvas({ canvasId }, url, success_callback) {
 
 		if (err) throw err;
 		var dbo = db.db("CanvasInfo");
-		var myobj = { canvasId: canvasId };
-		dbo.collection("canvasInfoCollection").find({ canvasId: canvasId }, {}).toArray(function (err, result) {
+		dbo.collection("canvasInfoCollection").find({ canvasId: canvasId }).toArray(function (err, result) {
 			if (err) throw err;
 			db.close();
 			success_callback(result[0]);
@@ -173,12 +145,12 @@ async function getAllCanvasPerUser({ username }, url, success_callback) {
 }
 
 
-async function updateCanvas(canvasId, canvasItems, url) {
+async function updateCanvas(canvasId, canvasData, url) {
 	// Hash the Password
 	MongoClient.connect(url, function (err, db) {
 		if (err) throw err;
 		var dbo = db.db("CanvasInfo");
-		dbo.collection("canvasInfoCollection").updateOne({ canvasId: canvasId }, { $set: { canvasItems: canvasItems } }, function (err, res) {
+		dbo.collection("canvasInfoCollection").updateOne({ canvasId: canvasId }, { $set: { canvasData: canvasData } }, function (err, res) {
 			if (err) throw err;
 			console.log("1 Canvas updated");
 			db.close();
@@ -278,8 +250,7 @@ io.on('connection', (socket) => {
 				socket.emit("Successful Authentication", user_info.username);
 				//Add the username and socket id to current user list
 				current_users[user_info.username] = {
-					"socket_id": socket.id,
-					"colour": "000000"
+					"socket_id": socket.id
 				}
 				socketsToUsers[socket.id] = user_info.username;
 
@@ -297,23 +268,14 @@ io.on('connection', (socket) => {
 
 	});
 
-	socket.on('Update colour', (colour) => {
-		current_users[socketsToUsers[socket_id]]['colour'] = colour;
-		// DEBUG
-		console.log(current_users);
-	});
-
 	socket.on('createCanvas', (info) => {
 		let success = () => {
 			socket.emit("Successful Canvas Creation", info.canvasId);
 			//Add user to canvas channel
 			socket.join(info.canvasId)
 			// make an entry in the canvases dictionary with the name
-			current_canvases[info.canvasId] = new Canvas(info.canvasId, { stickynotes: [], drawings: [], users: [] });
+			current_canvases[info.canvasId] = new Canvas(info.canvasId, { canvasData: "" });
 
-			if (!(socketsToUsers[socket.id] in current_canvases[info.canvasId].users)) {
-				current_canvases[info.canvasId].users.push(socketsToUsers[socket.id]);
-			}
 			console.log(current_canvases);
 
 		}
@@ -326,24 +288,21 @@ io.on('connection', (socket) => {
 	socket.on('openCanvas', (canvas_info) => {
 		//Check if canvas is already open
 		if (canvas_info.canvasId in current_canvases) {
-			socket.emit("Render Canvas", current_canvases[canvas_info.canvasId].objForClient())
-			// Add the user to the canvas List 
-			console.log(current_canvases[canvas_info.canvasId]);
-			if (!(socketsToUsers[socket.id] in current_canvases[canvas_info.canvasId].users)) {
-				current_canvases[canvas_info.canvasId].users.push(socketsToUsers[socket.id]);
-			}
-			socket.join(canvas_info.canvasId)
-			io.to(canvas_info.canvasId).emit('updateActiveUserList', updateActiveUserList(canvas_info.canvasId, socket))
+            let getCanvasObject = (result) => {
+                socket.emit("Render Canvas", result.canvasData);
+                console.log(current_canvases[canvas_info.canvasId]);
+                socket.join(canvas_info.canvasId)
+                io.to(canvas_info.canvasId).emit('updateActiveUserList', updateActiveUserList(canvas_info.canvasId, socket))
+            }
+
+            // Get canvas from database
+			getCanvas(canvas_info, URI, getCanvasObject)
 		} else {
 
 			let createCanvasObject = (result) => {
 				// create canvas object and add it to the current list
-				current_canvases[canvas_info.canvasId] = new Canvas(canvas_info.canvasId, result.canvasInfo);
-                socket.emit("Render Canvas", current_canvases[canvas_info.canvasId].objForClient())
-				console.log(current_canvases[canvas_info.canvasId]);
-				if (!(socketsToUsers[socket.id] in current_canvases[canvas_info.canvasId].users)) {
-					current_canvases[canvas_info.canvasId].users.push(socketsToUsers[socket.id]);
-				}
+				current_canvases[canvas_info.canvasId] = new Canvas(canvas_info.canvasId, result.canvasData);
+                socket.emit("Render Canvas", current_canvases[canvas_info.canvasId].canvasData)
 				console.log(current_canvases[canvas_info.canvasId]);
 				socket.join(canvas_info.canvasId)
 				io.to(canvas_info.canvasId).emit('updateActiveUserList', updateActiveUserList(canvas_info.canvasId, socket))
@@ -351,7 +310,7 @@ io.on('connection', (socket) => {
 			}
 
 			// Get canvas from database
-			getCanvas(canvas_info, URI, createCanvasObject,)
+			getCanvas(canvas_info, URI, createCanvasObject)
 		}
 		// Add the user to the canvas List 
 	});
@@ -361,46 +320,24 @@ io.on('connection', (socket) => {
 		console.log(current_canvases)
 		let canvas = {
 			canvasId: current_canvases[info.canvasId].canvasId,
-			canvasInfo: {
-				stickynotes: current_canvases[info.canvasId].stickynotes,
-				drawings: current_canvases[info.canvasId].drawings,
-				users: current_canvases[info.canvasId].users,
-			}
+            canvasData: current_canvases[info.canvasId].canvasData
 		};
 
-		updateCanvas(info.canvasId, canvas, URI);
+		updateCanvas(canvas.canvasId, canvas.canvasData, URI);
 		socket.leave(info.canvasId);
 
 		//Update the user list
 		io.to(info.canvasId).emit('updateActiveUserList', updateActiveUserList(info.canvasId, socket))
 	});
 
-	socket.on('Drawing', (data) => {
-		let d =
-		{
-			x0: data.x0,
-			y0: data.y0,
-			x1: data.x1,
-			y1: data.y1,
-			colour: current_users[socketsToUsers[socket.id]][colour],
-			thickness: data.thickness,
-			canvasId: data.canvasId
-		};
-		current_canvases[data.canvasId].drawings.push(d);
-
-
+    socket.on('drawing', (data) => {
+		updateCanvas(data.canvasId, data.canvasData, URI);
+		io.to(data.canvasId).emit('update canvas', data.canvasData);
 	});
 
-	// socket.on('chat message', (data) => {
-	// 	io.to(data.canvasId).emit("chat message", {
-	// 		"message": data.msg,
-	// 		"colour":current_users[socketsToUsers[socket_id]].colour
-	// 	});
-	// });
 
-	// temporary
-	socket.on('chat message', (user, msg) => {
-		io.emit('new message', user, msg);
+	socket.on('chat message', (info, msg) => {
+		io.in(info.canvasId).emit('new message', info, msg);
 	});
 
 	socket.on('disconnect', () => {
