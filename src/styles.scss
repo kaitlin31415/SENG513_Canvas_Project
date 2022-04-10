@@ -143,6 +143,15 @@ $color-5: #23272a;
     .modal-dialog .btn-primary {
         color: white;
     }
+
+    /* Export Button Modal */
+    .file {
+        padding: 1vw 1vh;
+        width: 100%;
+        height: 90%;
+        background-color: $color-1;
+        color: white;
+    }
     
     .brushsize-modal-col {
         width: 33.33%;
