@@ -6,12 +6,12 @@ const Board = (props) => {
   const socket = useContext(SocketContext);
 
   useEffect(() => {
-    socket.emit("openCanvas", { canvasId: props.canvasId });
-  }, []);
-
-  useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
+    socket.emit("openCanvas", { canvasId: props.canvasId });
+
+    const color = props.color;
+    const thickness = props.thickness;
 
     let drawing = false;
     const current = {};
@@ -21,8 +21,8 @@ const Board = (props) => {
       context.beginPath();
       context.moveTo(x0, y0);
       context.lineTo(x1, y1);
-      context.strokeStyle = "#000000";
-      context.lineWidth = props.thickness / 2;
+      context.strokeStyle = color;
+      context.lineWidth = thickness;
       context.stroke();
       context.closePath();
 
@@ -113,7 +113,7 @@ const Board = (props) => {
 
     window.addEventListener("resize", onResize, false);
     onResize();
-  }, [socket]);
+  }, [socket, props.color, props.thickness]);
 
   return (
     <div className="canvas-display">
