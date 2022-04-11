@@ -28,7 +28,7 @@ const HeaderBar = (props) => {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
       <Nav style={{ marginLeft: "1.6vw" }}>
-        <Home />
+        <Home canvasName={canvasName}/>
       </Nav>
 
       <Nav>

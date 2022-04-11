@@ -60,6 +60,7 @@ const ActiveCanvasPage = () => {
         document.getElementById("chat-input").value = "";
     };
 
+
     const colorText = (color, text) => {
         return `<span style='color: ${color}'>${text}</span>`;
     };

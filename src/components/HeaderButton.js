@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import "../styles.scss";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/user";
+import { SocketContext } from "../context/socket";
+
 
 // Logout button
 const Logout = () => {
@@ -23,12 +25,18 @@ const Logout = () => {
 }
 
 // Home button
-const Home = () => {
+const Home = (props) => {
     let navigate = useNavigate();
+    const socket = useContext(SocketContext);
+
 
     // goto login page
     const handleGoHome = () => {
         navigate('/allcanvases')
+        /* Leave Canvas */
+        socket.emit("leaveCanvas", {canvasId:props.canvasName});
+
+
     }
 
     return (
