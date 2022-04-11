@@ -24,15 +24,18 @@ const ExportCanvasModal = (props) => {
                     <Container>
                         <Row>
                             <Col>
-                                <Image className='file' src={pngFile} fluid />
+                                <Image className='file' src={pngFile} onClick={() => {
+                                    props.setCanvasDownloaded(true);
+                                    var a = document.createElement('a');
+                                    a.href = props.canvasData;
+                                    a.download = "canvasData";
+                                    document.body.appendChild(a);
+                                    a.click();
+                                    document.body.removeChild(a); 
+                                    handleClose();
+                                }} fluid />
                                 <br/>
                                 Export as PNG
-                            </Col>
-
-                            <Col>
-                                <Image className='file' src={jsonFile} fluid />
-                                <br/>
-                                Export as JSON
                             </Col>
                         </Row>
                     </Container>

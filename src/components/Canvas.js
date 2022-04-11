@@ -6,6 +6,7 @@ const Board = (props) => {
   const socket = useContext(SocketContext);
 
   useEffect(() => {
+    props.setCanvasDownloaded(false);
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     socket.emit("openCanvas", { canvasId: props.canvasId });
@@ -35,6 +36,7 @@ const Board = (props) => {
         canvasId: props.canvasId,
         canvasData: canvasData,
       });
+      props.setCanvasData(canvasData);
     };
 
     // Receive canvas from socket
@@ -44,6 +46,9 @@ const Board = (props) => {
       imageData.onload = function () {
         context.drawImage(imageData, 0, 0);
       };
+
+      const canvasData = canvas.toDataURL();
+      props.setCanvasData(canvasData);
     });
 
     socket.on("Render Canvas", (data) => {
@@ -52,6 +57,9 @@ const Board = (props) => {
       imageData.onload = function () {
         context.drawImage(imageData, 0, 0);
       };
+
+      const canvasData = canvas.toDataURL();
+      props.setCanvasData(canvasData);
     });
 
     // Mouse movements
@@ -113,7 +121,7 @@ const Board = (props) => {
 
     window.addEventListener("resize", onResize, false);
     onResize();
-  }, [socket, props.color, props.thickness]);
+  }, [socket, props.color, props.thickness, props.canvasDownloaded]);
 
   return (
     <div className="canvas-display">
