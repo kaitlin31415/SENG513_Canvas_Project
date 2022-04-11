@@ -117,6 +117,7 @@ const Board = (props) => {
     const onResize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      socket.emit("openCanvas", { canvasId: props.canvasId });
     };
 
     window.addEventListener("resize", onResize, false);
