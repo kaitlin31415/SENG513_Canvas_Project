@@ -170,8 +170,8 @@ async function addCanvasToUser(username, canvasId, url, success_callback, no_use
         dbo.collection("user_authentication").findOne({ userName: username }, function (err, result) {
 			if (err) throw err;
 			db.close();
-
-			if (result.length != 0) {
+			
+			if (result != null) {
 				let canvases = [];
 				if ("canvases" in result) {
 					canvases = result["canvases"];
@@ -318,12 +318,6 @@ io.on('connection', (socket) => {
 	socket.on('leaveCanvas', (info) => {
 		//Get the canvas at canvas Id
 		console.log(current_canvases)
-		let canvas = {
-			canvasId: current_canvases[info.canvasId].canvasId,
-            canvasData: current_canvases[info.canvasId].canvasData
-		};
-
-		updateCanvas(canvas.canvasId, canvas.canvasData, URI);
 		socket.leave(info.canvasId);
 
 		//Update the user list
@@ -340,19 +334,7 @@ io.on('connection', (socket) => {
 		io.in(info.canvasId).emit('new message', info, msg);
 	});
 
-	socket.on('disconnect', () => {
-		//This one still needs debugging
-		//Take the user out of the active users list and socket id list 
-		let name = socketsToUsers[socket.id];
-		delete socketsToUsers[socket.id];
-		delete current_users[name];
 
-		//Update the user lists of all rooms
-		Object.keys(socket.adapter.rooms).forEach(function (room, idx) {
-			io.to(room).emit('updateActiveUserList', updateActiveUserList(room, socket))
-		});
-
-	});
 
 	socket.on('checkAndAddUsername', (user_info) => {
 		let success = () => {
