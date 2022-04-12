@@ -7,26 +7,8 @@ const bcrypt = require('bcryptjs');
 class Canvas {
 	constructor(id, canvasData) {
 		this.id = id;
-        this.canvasData = canvasData;
+		this.canvasData = canvasData;
 	}
-	// *addDrawing(drawingJson) {
-	// 	this.drawings.push(drawingJson);
-	// }
-	// *addSticky(stickyJson) {
-	// 	this.stickynotes.push(stickyJson);
-	// }
-	// *addUser(user) {
-	// 	if (!(user in this.users)) {
-	// 		this.users.push(user);
-	// 	}
-	// }
-	// *objForDatabase() {
-	// 	return {
-	// 		drawings: this.drawings,
-	// 		stickies: this.stickynotes,
-	// 		users: this.users
-	// 	}
-	// }
 	*objForClient() {
 		return {
 			canvasData: this.canvasData
@@ -167,10 +149,10 @@ async function addCanvasToUser(username, canvasId, url, success_callback, no_use
 
 		if (err) throw err;
 		var dbo = db.db("Users");
-        dbo.collection("user_authentication").findOne({ userName: username }, function (err, result) {
+		dbo.collection("user_authentication").findOne({ userName: username }, function (err, result) {
 			if (err) throw err;
 			db.close();
-			
+
 			if (result != null) {
 				let canvases = [];
 				if ("canvases" in result) {
@@ -204,10 +186,10 @@ const server = http.createServer(app);
 
 const { Server } = require("socket.io");
 const io = new Server(server, {
-    cors: {
-        origin: "http://localhost:3000",
-        methods: ["GET", "POST"],
-      },
+	cors: {
+		origin: "http://localhost:3000",
+		methods: ["GET", "POST"],
+	},
 });
 
 // app.use(express.static('../dummyClient'))
@@ -229,10 +211,12 @@ function updateActiveUserList(roomName, socket) {
 	console.log(socket.adapter.rooms.get(roomName));
 	const clients = socket.adapter.rooms.get(roomName);
 	let updatedClientList = []
-	for (const clientId of clients) {
-		//this is the socket of each client in the room.
-		const clientSocket = io.sockets.sockets.get(clientId);
-		updatedClientList.push(socketsToUsers[clientSocket.id]);
+	if (clients != null) {
+		for (const clientId of clients) {
+			//this is the socket of each client in the room.
+			const clientSocket = io.sockets.sockets.get(clientId);
+			updatedClientList.push(socketsToUsers[clientSocket.id]);
+		}
 	}
 	return updatedClientList;
 }
@@ -288,21 +272,21 @@ io.on('connection', (socket) => {
 	socket.on('openCanvas', (canvas_info) => {
 		//Check if canvas is already open
 		if (canvas_info.canvasId in current_canvases) {
-            let getCanvasObject = (result) => {
-                socket.emit("Render Canvas", result.canvasData);
-                console.log(current_canvases[canvas_info.canvasId]);
-                socket.join(canvas_info.canvasId)
-                io.to(canvas_info.canvasId).emit('updateActiveUserList', updateActiveUserList(canvas_info.canvasId, socket))
-            }
+			let getCanvasObject = (result) => {
+				socket.emit("Render Canvas", result.canvasData);
+				console.log(current_canvases[canvas_info.canvasId]);
+				socket.join(canvas_info.canvasId)
+				io.to(canvas_info.canvasId).emit('updateActiveUserList', updateActiveUserList(canvas_info.canvasId, socket))
+			}
 
-            // Get canvas from database
+			// Get canvas from database
 			getCanvas(canvas_info, URI, getCanvasObject)
 		} else {
 
 			let createCanvasObject = (result) => {
 				// create canvas object and add it to the current list
 				current_canvases[canvas_info.canvasId] = new Canvas(canvas_info.canvasId, result.canvasData);
-                socket.emit("Render Canvas", current_canvases[canvas_info.canvasId].canvasData)
+				socket.emit("Render Canvas", current_canvases[canvas_info.canvasId].canvasData)
 				console.log(current_canvases[canvas_info.canvasId]);
 				socket.join(canvas_info.canvasId)
 				io.to(canvas_info.canvasId).emit('updateActiveUserList', updateActiveUserList(canvas_info.canvasId, socket))
@@ -324,7 +308,7 @@ io.on('connection', (socket) => {
 		io.to(info.canvasId).emit('updateActiveUserList', updateActiveUserList(info.canvasId, socket))
 	});
 
-    socket.on('drawing', (data) => {
+	socket.on('drawing', (data) => {
 		updateCanvas(data.canvasId, data.canvasData, URI);
 		io.to(data.canvasId).emit('update canvas', data.canvasData);
 	});
@@ -339,6 +323,10 @@ io.on('connection', (socket) => {
 	socket.on('checkAndAddUsername', (user_info) => {
 		let success = () => {
 			socket.emit("Successful Creation", user_info.username);
+			current_users[user_info.username] = {
+				"socket_id": socket.id
+			}
+			socketsToUsers[socket.id] = user_info.username;
 		}
 		let fail = () => {
 			socket.emit("User Already Exists", user_info.username);
