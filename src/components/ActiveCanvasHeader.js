@@ -31,9 +31,9 @@ const HeaderBar = (props) => {
         <Home canvasName={canvasName}/>
       </Nav>
 
-      <Nav>
+      <Navbar>
         {renderUser()}   
-      </Nav> 
+      </Navbar> 
 
       <Container className='active-canvas-header'>
         <Nav className="m-auto">
