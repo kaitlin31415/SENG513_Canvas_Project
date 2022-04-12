@@ -65,12 +65,19 @@ const ActiveCanvasPage = () => {
         return `<span style='color: ${color}'>${text}</span>`;
     };
 
+
+    const scrollToBottom = () => {
+        let chat = document.getElementsByClassName("chat-div-messages")[0]
+        chat.scrollTo(0, document.body.scrollHeight);
+    }
+
     useEffect(() => {
         socket.on("new message", (user, msg) => {
             console.log(`${user.username} sent: ${msg}`);
             let item = document.createElement("li");
             item.innerHTML = `${colorText(user.color, user.username)}: ${msg}`;
             document.getElementById("chat-messages").appendChild(item);
+            scrollToBottom();
         });
 
         //For Active Canvas header bar user icons
