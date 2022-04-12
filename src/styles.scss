@@ -251,6 +251,7 @@ $color-5: #23272a;
         display: flex;
         flex-direction: column;
         min-width: 250px !important;
+        max-width: 250px !important;
         padding-left: 10px;
         padding-right: 10px;
     }
@@ -271,12 +272,21 @@ $color-5: #23272a;
         display: flex;
         flex-direction: column-reverse;
         float: left;
-        overflow-y: auto;
+        overflow-y: scroll;
         overflow-x: hidden;
         width: 100%;
         background-color: $color-5;
         box-sizing: border-box;
         position: relative;
+    }
+
+    .chat-div-messages::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .chat-div-messages::-webkit-scrollbar-thumb {
+        background: grey;
+        border-radius: 5px;
     }
 
     #chat-messages {
