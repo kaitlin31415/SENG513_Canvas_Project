@@ -7,7 +7,7 @@ const Board = (props) => {
 
   useEffect(() => {
     socket.emit("openCanvas", { canvasId: props.canvasId });
-  }, [])
+  }, []);
 
   useEffect(() => {
     props.setCanvasDownloaded(false);
@@ -117,7 +117,21 @@ const Board = (props) => {
     canvas.addEventListener("touchend", onMouseUp, false);
     canvas.addEventListener("touchcancel", onMouseUp, false);
     canvas.addEventListener("touchmove", onMouseMove, false);
-  }, [socket, props.color, props.thickness, props.canvasDownloaded]);
+
+    return () => {
+      // Remove event listeners
+      canvas.removeEventListener("mousedown", onMouseDown, false);
+      canvas.removeEventListener("mouseup", onMouseUp, false);
+      canvas.removeEventListener("mouseout", onMouseUp, false);
+      canvas.removeEventListener("mousemove", onMouseMove, false);
+
+      // Touch support for mobile devices
+      canvas.removeEventListener("touchstart", onMouseDown, false);
+      canvas.removeEventListener("touchend", onMouseUp, false);
+      canvas.removeEventListener("touchcancel", onMouseUp, false);
+      canvas.removeEventListener("touchmove", onMouseMove, false);
+    };
+  }, [props.color, props.thickness]);
 
   return (
     <div className="canvas-display">
